@@ -1,9 +1,8 @@
 import Head from 'next/head'
-import styles from '../styles/Layout.module.css'
 
 export default function Layout({ children }) {
   return (
-    <div className={styles.container}>
+    <div className="min-h-screen flex flex-col">
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta
@@ -13,9 +12,9 @@ export default function Layout({ children }) {
         <meta name="og:title" content="John Doe - Professional Portfolio" />
       </Head>
 
-      <main className={styles.main}>{children}</main>
+      <main className="flex-grow">{children}</main>
       
-      <footer className={styles.footer}>
+      <footer className="w-full h-24 border-t border-gray-200 flex justify-center items-center">
         © {new Date().getFullYear()} John Doe. All rights reserved.
       </footer>
     </div>
