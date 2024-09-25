@@ -1,0 +1,32 @@
+meromorphy/
+│
+├── _config.yml
+├── index.md
+├── 404.html
+├── Gemfile
+├── _layouts/
+│   ├── default.html
+│   ├── post.html
+│   └── page.html
+│
+├── _includes/
+│   ├── header.html
+│   ├── footer.html
+│   └── navigation.html
+│
+├── _posts/
+│   ├── 2024-09-25-welcome-to-my-blog.md
+│   └── 2024-09-26-another-post.md
+│
+├── _pages/
+│   ├── about.md
+│   └── contact.md
+│
+├── assets/
+│   ├── css/
+│   │   └── main.scss
+│   ├── images/
+│   └── js/
+│
+└── _data/
+    └── navigation.yml
