@@ -1,32 +1,34 @@
 meromorphy/
 │
-├── _config.yml
-├── index.md
-├── 404.html
-├── Gemfile
-├── _layouts/
-│   ├── default.html
-│   ├── post.html
-│   └── page.html
+├── pages/
+│   ├── index.js
+│   ├── _app.js
+│   ├── 404.js
+│   ├── posts/
+│   │   └── [slug].js
+│   └── about.js
 │
-├── _includes/
-│   ├── header.html
-│   ├── footer.html
-│   └── navigation.html
+├── components/
+│   ├── Layout.js
+│   ├── Header.js
+│   ├── Footer.js
+│   └── Navigation.js
 │
-├── _posts/
-│   ├── 2024-09-25-welcome-to-my-blog.md
-│   └── 2024-09-26-another-post.md
+├── posts/
+│   ├── welcome-to-my-blog.md
+│   └── another-post.md
 │
-├── _pages/
-│   ├── about.md
-│   └── contact.md
-│
-├── assets/
-│   ├── css/
-│   │   └── main.scss
+├── public/
 │   ├── images/
-│   └── js/
+│   └── favicon.ico
 │
-└── _data/
-    └── navigation.yml
+├── styles/
+│   ├── global.css
+│   └── Home.module.css
+│
+├── lib/
+│   └── posts.js
+│
+├── next.config.js
+├── package.json
+└── .gitignore
