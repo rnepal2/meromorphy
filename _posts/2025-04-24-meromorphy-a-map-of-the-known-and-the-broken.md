@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Meromorphy - A Map of the Known and the Broken"
-date: 2024-07-24
+date: 2025-04-24
 # categories: introduction philosophy # Optional: add categories if desired
 ---
 

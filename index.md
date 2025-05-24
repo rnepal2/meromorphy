@@ -3,7 +3,7 @@ layout: home
 title: Home
 ---
 
-🌀 Meromorphy — Almost understood. Beautifully broken.
+🌀 Meromorphy — *Almost Understood. Beautifully Broken.*
 
 <p align="center">
   <img src="{{ 'assets/images/Meromorphy.png' | relative_url }}" alt="Meromorphy logo" style="display:block; margin:auto; width:250px; max-width:80%;"/>
