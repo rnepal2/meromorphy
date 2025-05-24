@@ -32,11 +32,11 @@ p { margin: 1em 0; }
 li { margin: 0.4em 0; }
 
 .w {
-  width: 70%;
+  width: 66%;
   max-width: 1080px;
   min-width: 320px;
   margin: 0 auto;
-  padding: 4em 2em;
+  padding: 2em 2em; // was 4em 2em
 }
 
 table, th, td {
