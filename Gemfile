@@ -6,4 +6,5 @@ gem "jekyll-seo-tag" # Recommended for GitHub Pages
 
 # GitHub Pages might manage its own jekyll version and other defaults.
 # Adding common GitHub Pages gems:
+gem "jekyll-feed"
 gem "github-pages", group: :jekyll_plugins

@@ -23,3 +23,6 @@ theme_config:
     title_misc_list: Details
     title_blog: Blog
     title_old_projects: Old Projects
+  plugins:
+    - jekyll-feed
+    - jekyll-seo-tag

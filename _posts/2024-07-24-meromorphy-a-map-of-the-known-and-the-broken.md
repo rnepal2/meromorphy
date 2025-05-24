@@ -1,19 +1,17 @@
 ---
 layout: post
 title: "Meromorphy - A Map of the Known and the Broken"
-date: 2024-07-24 00:00:00 +0000
+date: 2024-07-24
 # categories: introduction philosophy # Optional: add categories if desired
 ---
 
-In mathematics, a meromorphic function is something that behaves—well, almost perfectly. It’s smooth, logical, beautifully structured… until it’s not. At certain isolated points, called poles, the function just loses its cool and shoots off to infinity. These aren’t flaws exactly. They’re part of the design. A meromorphic function is allowed to break, but only in very specific, well-documented ways.
+In mathematics, a meromorphic function is something that behaves—well, almost perfectly. It’s smooth, logical, and beautifully structured until it’s not. At certain isolated points, called poles, the function just loses its cool and shoots off to infinity. These aren’t flaws exactly. They’re part of the design. A meromorphic function is allowed to break, but only in very specific, well-documented ways.
 
-I’ve always found that idea oddly comforting.
-
-It feels like an honest description not just of functions, but of people. Of life. Of the world.
+I’ve always found that idea oddly comforting. It feels like an honest description not just of functions, but of people. Of life. Of the universe.
 
 We, too, are mostly well-behaved—predictable, learnable, explainable. We follow patterns. We build frameworks. We read articles titled “10 Principles of Something” because we believe, quite reasonably, that things can be understood.
 
-And yet... each of us has our own poles.
+And yet, each of us has our own poles.
 Personal ones. Quiet ones. Some tender, some terrifying.
 Places where logic fails and emotion takes over, or where memory refuses to resolve, or where a question just keeps echoing without answer.
 
