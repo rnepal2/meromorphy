@@ -32,7 +32,9 @@ p { margin: 1em 0; }
 li { margin: 0.4em 0; }
 
 .w {
-  max-width: 1080; // was 720px
+  width: 70%;
+  max-width: 1080px;
+  min-width: 320px;
   margin: 0 auto;
   padding: 4em 2em;
 }
