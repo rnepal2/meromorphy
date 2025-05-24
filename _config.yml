@@ -23,6 +23,10 @@ theme_config:
     title_misc_list: Details
     title_blog: Blog
     title_old_projects: Old Projects
-  plugins:
-    - jekyll-feed
-    - jekyll-seo-tag
+
+# Remove remote_theme and use theme directly from local files
+# Theme configuration remains the same, but no remote_theme setting needed
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag

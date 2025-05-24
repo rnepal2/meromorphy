@@ -1,10 +1,16 @@
 source "https://rubygems.org"
 
-gem "jekyll", "~> 3.9"  # Or a version compatible with GitHub Pages
-gem "moonwalk"
-gem "jekyll-seo-tag" # Recommended for GitHub Pages
+gem "jekyll", "~> 3.9.3"
+gem "webrick"  # Required for Ruby 3.0+
 
-# GitHub Pages might manage its own jekyll version and other defaults.
-# Adding common GitHub Pages gems:
-gem "jekyll-feed"
+# Use github-pages gem to ensure compatibility
 gem "github-pages", group: :jekyll_plugins
+
+# Add additional plugins
+group :jekyll_plugins do
+  gem "jekyll-feed"
+  gem "jekyll-seo-tag"
+end
+
+# Theme gem
+gem "moonwalk"
