@@ -1,6 +1,7 @@
 title: Meromorphy
 description: Me and my random thoughts.
-baseurl: "/meromorphy"
+url: "https://meromorphy.com"
+baseurl: ""
 
 theme_config:
   appearance: "dark" # set default to dark mode
