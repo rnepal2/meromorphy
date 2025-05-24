@@ -1,6 +1,6 @@
-remote_theme: abhinavs/moonwalk
 title: Meromorphy
 description: A little bit about me and my thoughts.
+baseurl: "/meromorphy"
 
 theme_config:
   appearance: "dark" # set default to dark mode
