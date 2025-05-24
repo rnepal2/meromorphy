@@ -1,0 +1,13 @@
+navbar_entries:
+  - title: Home
+    url: /
+  - title: About
+    url: about
+  - title: Blog
+    url: blog
+
+footer_entries:
+  - title: GitHub
+    url: https://github.com/rnepal2
+  - title: Feed
+    url: feed.xml # Standard Jekyll feed path
