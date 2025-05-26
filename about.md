@@ -3,14 +3,7 @@ layout: post
 title: About Me
 ---
 
-<div style="display: flex; align-items: center; justify-content: center; gap: 2em; flex-wrap: wrap; margin-bottom: 1em; margin-right: 2em">
-  <div style="flex: 1; min-width: 220px;">
-    <h2 style="margin-top:0;">Meromorphy — Almost Understood. Beautifully Broken.</h2>
-  </div>
-  <div style="flex: 0 0 180px; text-align: center;">
-    <img src="{{ 'assets/images/Photo.jpg' | relative_url }}" alt="Rabindra Nepal headshot" style="border-radius:50%; width:220px; max-width:100%;">
-  </div>
-</div>
+## Meromorphy — Almost Understood. Beautifully Broken
 
 I currently work as a Data Scientist at Johnson & Johnson, where I lead analytical initiatives within corporate functions to drive innovation through generative AI and data science. My work focuses on developing scalable generative AI and machine learning solutions to enhance employee experience and corporate functions.
 
@@ -39,26 +32,29 @@ Before moving into applied data science in industry, I spent several years in ac
 ### *Connect*
 
 <p style="text-align:center; margin-top:2em;">
-  <a href="https://www.linkedin.com/in/nepalrabindra/" target="_blank" title="LinkedIn" style="margin:0 1em;">
+  <a href="https://www.linkedin.com/in/nepalrabindra/" target="_blank" title="LinkedIn" style="margin:0 1em; display:inline-block;">
     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" style="vertical-align:middle;">
       <g>
         <rect width="32" height="32" rx="6" fill="#0077B5"/>
         <path d="M12.1 24h-3.2V13.3h3.2V24zM10.5 12c-1 0-1.7-.7-1.7-1.6 0-.9.7-1.6 1.7-1.6s1.7.7 1.7 1.6c0 .9-.7 1.6-1.7 1.6zm13.5 12h-3.2v-5.5c0-1.3-.5-2.1-1.6-2.1-.9 0-1.4.6-1.7 1.2-.1.2-.1.5-.1.8V24h-3.2s.1-10.7 0-11.7h3.2v1.7c.4-.6 1.1-1.5 2.7-1.5 2 0 3.5 1.3 3.5 4.1V24z" fill="#fff"/>
       </g>
     </svg>
-  </a>
-  <a href="https://github.com/rnepal2" target="_blank" title="GitHub" style="margin:0 1em;">
+  </a><a href="https://github.com/rnepal2" target="_blank" title="GitHub" style="margin:0 1em; display:inline-block;">
     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" style="vertical-align:middle;">
       <g>
         <rect width="32" height="32" rx="6" fill="#181717"/>
         <path fill="#fff" fill-rule="evenodd" clip-rule="evenodd" d="M16 7C10.477 7 6 11.477 6 17c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.004.07 1.532 1.032 1.532 1.032.892 1.529 2.341 1.088 2.91.832.091-.646.35-1.088.636-1.34-2.221-.253-4.555-1.111-4.555-4.944 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0116 13.844c.85.004 1.705.115 2.504.337 1.909-1.295 2.748-1.025 2.748-1.025.546 1.378.202 2.397.1 2.65.64.699 1.028 1.592 1.028 2.683 0 3.842-2.337 4.687-4.566 4.936.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.744 0 .268.18.579.688.481C23.138 25.162 26 21.418 26 17c0-5.523-4.477-10-10-10z"/>
       </g>
     </svg>
-  </a>
-  <a href="https://x.com/ccRabindra" target="_blank" title="Twitter/X" style="margin:0 1em;">
+  </a><a href="https://x.com/ccRabindra" target="_blank" title="Twitter/X" style="margin:0 1em; display:inline-block;">
     <svg width="32" height="32" viewBox="0 0 32 32" fill="none" style="vertical-align:middle;">
       <rect width="32" height="32" rx="6" fill="#000"/>
       <path d="M22.667 9.333h-2.027l-3.307 4.36-3.16-4.36h-2.173l4.16 5.76-4.36 5.907h2.027l3.507-4.747 3.44 4.747h2.173l-4.44-5.907 4.166-5.76z" fill="#fff"/>
+    </svg>
+  </a><a href="https://scholar.google.com/citations?user=Z8tzkKEAAAAJ&hl=en" target="_blank" title="Google Scholar" style="margin:0 1em; display:inline-block;">
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" style="vertical-align:middle;">
+      <rect width="32" height="32" rx="6" fill="#4285F4"/>
+      <path d="M16 10c-3.314 0-6 1.343-6 3v6c0 1.657 2.686 3 6 3s6-1.343 6-3v-6c0-1.657-2.686-3-6-3zm0 2c2.21 0 4 .672 4 1.5S18.21 15 16 15s-4-.672-4-1.5S13.79 12 16 12zm0 8c-2.21 0-4-.672-4-1.5v-1.528c1.13.66 2.86 1.028 4 1.028s2.87-.368 4-1.028V18.5c0 .828-1.79 1.5-4 1.5z" fill="#fff"/>
     </svg>
   </a>
 </p>

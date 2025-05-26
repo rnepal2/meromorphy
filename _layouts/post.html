@@ -9,5 +9,7 @@ layout: default
   Home
 </a>
 <h1 class="post-title">{{ page.title }}</h1>
-{% include date_and_social_share.html %}
+{% unless page.hide_meta %}
+  {% include date_and_social_share.html %}
+{% endunless %}
 {{ content }}

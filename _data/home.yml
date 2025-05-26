@@ -5,6 +5,8 @@ navbar_entries:
     url: about
   - title: Blog
     url: blog
+  - title: Contact
+    url: contact
 
 footer_entries:
   - title: GitHub
