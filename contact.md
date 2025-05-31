@@ -5,7 +5,6 @@ permalink: /contact/
 hide_meta: true
 ---
 
-
 <div style="text-align:start; margin-bottom: 1.5em; margin-top: 2em; font-style: italic;">
   If you'd like to get in touch or have any questions for me, please use the form below.
 </div>
