@@ -15,23 +15,27 @@
           •
           &nbsp;
           {%- endif -%}
+          {% comment %} --- Soopr link in credits START --- {% endcomment %}
           {%- if site.soopr -%}
-          Powered by <a href="https://www.soopr.co" target="_blank" rel="noreferrer">Soopr</a>
+          <!-- Powered by <a href="https://www.soopr.co" target="_blank" rel="noreferrer">Soopr</a>
           &nbsp;
           •
-          &nbsp;
+          &nbsp; -->
           {%- endif -%}
+          {% comment %} --- Soopr link in credits END --- {% endcomment %}
           Theme&nbsp; <a href="https://github.com/abhinavs/moonwalk" target="_blank" rel="noreferrer">Moonwalk</a>
         </div>
       </div>
     </main>
 
+    {% comment %} --- Soopr SDK script START --- {% endcomment %}
     {%- if site.soopr -%}
-      {%- if site.soopr.publish_token and jekyll.environment == "production" -%}
+      <!-- {%- if site.soopr.publish_token and jekyll.environment == "production" -%}
         <script async defer data-soopr-token="{{site.soopr.publish_token}}" src="https://sdk.soopr.co/soopr.js"></script>
       {%- else -%}
         <script async defer src="https://sdk.soopr.co/soopr.js"></script>
-      {%- endif -%}
+      {%- endif -%} -->
     {%- endif -%}
+    {% comment %} --- Soopr SDK script END --- {% endcomment %}
   </body>
 </html>

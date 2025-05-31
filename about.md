@@ -3,7 +3,9 @@ layout: post
 title: About Me
 ---
 
-## Meromorphy — Almost Understood. Beautifully Broken
+<blockquote style="border-left: 4px solidrgb(95, 132, 205); padding-left: 1em; color: solidrgb(95, 132, 205); margin: 1.5em 0; font-style: italic;">
+🌀 Meromorphy — Almost Understood. Beautifully Broken
+</blockquote>
 
 I currently work as a Data Scientist at Johnson & Johnson, where I lead analytical initiatives within corporate functions to drive innovation through generative AI and data science. My work focuses on developing scalable generative AI and machine learning solutions to enhance employee experience and corporate functions.
 
