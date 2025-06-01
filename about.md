@@ -1,6 +1,7 @@
 ---
 layout: post
 title: About Me
+hide_meta: true
 ---
 
 <blockquote style="border-left: 4px solidrgb(95, 132, 205); padding-left: 1em; color: solidrgb(95, 132, 205); margin: 1.5em 0; font-style: italic;">

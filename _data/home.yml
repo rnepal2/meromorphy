@@ -8,6 +8,12 @@ navbar_entries:
   - title: Contact
     url: contact
 
+project_entries:
+  - title: Molecular-Solubility-Prediction-with-GCN
+    url: 2025/05/31/Molecular-Solubility-Prediction-with-GCN/
+    desc: A comparative study of aqueous solubility prediction with QSPR vs GCN
+    highlight: GNN
+
 footer_entries:
   - title: GitHub
     url: https://github.com/rnepal2

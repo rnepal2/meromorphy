@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Contact Me
+title: Contact me
 permalink: /contact/
 hide_meta: true
 ---
@@ -16,15 +16,15 @@ hide_meta: true
     style="
       background: var(--bg-secondary, #23272f);
       color: var(--text, #adb5bd);
-      padding: 2.5em 2em;
-      border-radius: 1em;
-      box-shadow: 0 4px 24px 0 rgba(0,0,0,0.10);
+      padding: 2em 2em;
+      border-radius: 0.5em;
+      box-shadow: 0 2px 12px 0 rgba(0,0,0,0.10);
       max-width: 720px;
       width: 100%;
       font-family: inherit;
     "
   >
-    <label for="email" style="font-weight: 600; display:block; margin-bottom:0.5em;">Your email</label>
+    <label for="email" style="font-weight: 600; display:block; margin-bottom:0.5em;">Your email address</label>
     <input type="email" id="email" name="email" required style="
       width: 100%;
       padding: 0.7em;
@@ -72,7 +72,7 @@ hide_meta: true
       cursor: pointer;
       transition: background 0.2s;
       box-shadow: 0 2px 8px 0 rgba(0,0,0,0.08);
-    " onmouseover="this.style.background='#4f46e5'" onmouseout="this.style.background='var(--links, #6366f1)'">
+    " onmouseover="this.style.background='#4f46e5'" onmouseout="this.style.background='var(--links,rgb(11, 14, 238))'">
       Send
     </button>
   </form>

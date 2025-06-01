@@ -13,3 +13,12 @@ layout: default
   {% include date_and_social_share.html %}
 {% endunless %}
 {{ content }}
+
+{% unless page.title == "About Me" or page.url == "/about/" or page.title == "Contact me" %}
+<div style="width:60%; display:flex; justify-content:center; align-items:center; margin-top:2em; margin-bottom:1em;">
+  <img src="{{ 'assets/images/favicon/android-icon-192x192.png' | relative_url }}" alt="Site Icon" style="width:48px; height:48px; margin-right:0.7em;" />
+  <span style="font-size:1.1em; font-family: 'Inter', sans-serif; color: var(--text);">
+    &copy; <strong>Rabindra Nepal</strong>
+  </span>
+</div>
+{% endunless %}

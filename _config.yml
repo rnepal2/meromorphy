@@ -12,18 +12,17 @@ theme_config:
   show_navbar: true # explicitly enable navbar
   show_footer: true # explicitly enable footer (we have footer_entries)
   show_copyright: true # default from moonwalk
-  # Settings for home page sections (can be adjusted later)
-  show_projects: false # keeping it simple for now
+  show_projects: true # keeping it simple for now
   show_blog: true # show blog posts on home, if theme supports
   show_old_projects: false # keeping it simple for now
   show_misc_list: false # keeping it simple for now
   show_reading_time: true # default from moonwalk
   show_tags: true # default from moonwalk
   home: # titles for sections on home page
-    title_projects: Portfolio
+    title_projects: Projects
     title_misc_list: Details
     title_blog: Blog
-    title_old_projects: Old Projects
+    title_old_projects: Past Projects
 
 # Remove remote_theme and use theme directly from local files
 # Theme configuration remains the same, but no remote_theme setting needed

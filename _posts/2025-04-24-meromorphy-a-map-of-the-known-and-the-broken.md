@@ -15,6 +15,6 @@ And yet, each of us has our own poles.
 Personal ones. Quiet ones. Some tender, some terrifying.
 Places where logic fails and emotion takes over, or where memory refuses to resolve, or where a question just keeps echoing without answer.
 
-The world has its poles too. Science has done a remarkable job explaining what’s going on—from the subatomic to the cosmic. But even now, there are things that remain stubbornly outside the equation. Consciousness. Time. Death. The part of your brain that lights up when you hear a certain piece of music and, for a moment, you feel both completely alive and totally unknowable.
+The world has its poles too. Science has done a remarkable job explaining what’s going on—from the subatomic to the cosmic. But even now, there are things that remain stubbornly outside the equation. Consciousness. Time. Big Bang. The part of your brain that lights up when you hear a certain piece of music and, for a moment, you feel both completely alive and totally unknowable.
 
-So that’s what Meromorphy is. It’s a place to write from within the known, but always facing the edge of the unknown. It’s not a blog about math (though it might flirt with it now and then). It’s a space for science, life, innovation, and being human—being mostly coherent, but not entirely.
+So that’s what Meromorphy is. It’s a place to reflect from within the known, but always facing the edge of the unknown. It’s not a blog about math (though it might flirt with it now and then). It’s a space for science, life, innovation, and being human—being mostly coherent, but not entirely.
