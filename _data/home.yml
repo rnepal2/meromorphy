@@ -10,7 +10,7 @@ navbar_entries:
 
 project_entries:
   - title: Molecular-Solubility-Prediction-with-GCN
-    url: 2025/05/31/Molecular-Solubility-Prediction-with-GCN/
+    url: 2025/05/31/Molecular-Solubility-Prediction-with-GCN.html
     desc: A comparative study of aqueous solubility prediction with QSPR vs GCN
     highlight: GNN
 
