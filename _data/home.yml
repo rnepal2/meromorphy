@@ -3,6 +3,8 @@ navbar_entries:
     url: /
   - title: About
     url: about
+  - title: Projects
+    url: projects
   - title: Blog
     url: blog
   - title: Contact
@@ -10,9 +12,14 @@ navbar_entries:
 
 project_entries:
   - title: Molecular-Solubility-Prediction-with-GCN
-    url: 2025/05/31/Molecular-Solubility-Prediction-with-GCN.html
+    url: /projects/2025/05/31/Molecular-Solubility-Prediction-with-GCN.html
     desc: A comparative study of aqueous solubility prediction with QSPR vs GCN
     highlight: GNN
+
+  - title: ChatLibrary-RAG-Pipeline-with-Private-Data
+    url: /projects/2025/06/05/ChatLibrary-RAG-Pipeline-with-Private-Data.html
+    desc: A RAG framework for building chatbot with a library of private data
+    highlight: GenAI
 
 footer_entries:
   - title: GitHub

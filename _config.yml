@@ -30,3 +30,9 @@ theme_config:
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-sitemap
+
+collections:
+  projects:
+    output: true
+    permalink: /projects/:year/:month/:day/:title.html
