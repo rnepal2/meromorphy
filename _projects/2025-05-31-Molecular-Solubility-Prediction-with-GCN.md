@@ -190,4 +190,4 @@ This project is just a one example test of what is possible. There are many exci
 *   **Best of Both Worlds (Hybrid Models):** Why not try to combine the interpretability and speed of QSPR with the feature-learning power of GNNs? Hybrid models are a promising area.
 *   **Predictions with Confidence (Conformal Prediction):** Wouldn't it be great if a model could say, "I predict this is soluble, and I'm 90% sure"? Conformal prediction frameworks can add this kind of statistically sound confidence level to predictions, which is incredibly valuable for making go/no-go decisions.
 
-Want to see the code and dig deeper? Check out the full project on my [GitHub repo](https://github.com/rnepal2/Solubility-Prediction-with-Graph-Neural-Networks)!
+Want to check the code and dig deeper? Check out the full project on my [GitHub repo](https://github.com/rnepal2/Solubility-Prediction-with-Graph-Neural-Networks)!

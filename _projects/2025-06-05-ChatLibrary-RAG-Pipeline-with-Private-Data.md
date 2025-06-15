@@ -74,3 +74,6 @@ This methodology provides a more precise way to interact with organizational dat
 ChatLibrary demonstrates an effective application of a RAG pipeline for querying proprietary knowledge bases. Its design emphasizes document retrieval, adaptive query handling, and rigorous validation to ensure trustworthy and relevant answers.
 
 Further improvements could involve integrating a broader range of data sources, enhancing conversational memory for more natural follow-up interactions, or exploring advanced methods for synthesizing information from multiple documents. The ongoing refinement of such AI systems is key to developing more reliable and intelligent information access tools.
+
+Want to check full code and dig deeper? Check out the full project on my [GitHub repo](https://github.com/rnepal2/ChatLibrary)!
+

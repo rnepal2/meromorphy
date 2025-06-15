@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" class="html" data-theme="dark"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    
+      PersonaGraph: An Agentic Solution for Executive Profile Generation with Generative AI and Web Search
+    
+  </title>
+
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v3.9.5" />
+<meta property="og:title" content="PersonaGraph: An Agentic Solution for Executive Profile Generation with Generative AI and Web Search" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Manually gathering executive intelligence is a time-consuming and often incomplete endeavor. PersonaGraph automates this process, generating in-depth executive profiles with speed and precision. This article explores PersonaGraph’s backend architecture, built with Generative AI, LangGraph, and multi-agent systems. We will detail the agentic workflow that powers its insights and highlight key features of its user interface. Discover how PersonaGraph transforms executive research." />
+<meta property="og:description" content="Manually gathering executive intelligence is a time-consuming and often incomplete endeavor. PersonaGraph automates this process, generating in-depth executive profiles with speed and precision. This article explores PersonaGraph’s backend architecture, built with Generative AI, LangGraph, and multi-agent systems. We will detail the agentic workflow that powers its insights and highlight key features of its user interface. Discover how PersonaGraph transforms executive research." />
+<link rel="canonical" href="http://localhost:4000/projects/2025/06/14/Persona-Graph-Generate-Executive-Profile-with-Web-Search-and-Generative-AI.html" />
+<meta property="og:url" content="http://localhost:4000/projects/2025/06/14/Persona-Graph-Generate-Executive-Profile-with-Web-Search-and-Generative-AI.html" />
+<meta property="og:site_name" content="Meromorphy" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2025-06-14T00:00:00-04:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="PersonaGraph: An Agentic Solution for Executive Profile Generation with Generative AI and Web Search" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2025-06-14T00:00:00-04:00","datePublished":"2025-06-14T00:00:00-04:00","description":"Manually gathering executive intelligence is a time-consuming and often incomplete endeavor. PersonaGraph automates this process, generating in-depth executive profiles with speed and precision. This article explores PersonaGraph’s backend architecture, built with Generative AI, LangGraph, and multi-agent systems. We will detail the agentic workflow that powers its insights and highlight key features of its user interface. Discover how PersonaGraph transforms executive research.","headline":"PersonaGraph: An Agentic Solution for Executive Profile Generation with Generative AI and Web Search","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/projects/2025/06/14/Persona-Graph-Generate-Executive-Profile-with-Web-Search-and-Generative-AI.html"},"url":"http://localhost:4000/projects/2025/06/14/Persona-Graph-Generate-Executive-Profile-with-Web-Search-and-Generative-AI.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+  <link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Meromorphy" />
+
+  <!-- Favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/assets/images/favicon/site.webmanifest">
+  <link rel="mask-icon" href="/assets/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="/assets/images/favicon/favicon.ico">
+  <meta name="msapplication-TileColor" content="#00aba9">
+  <meta name="msapplication-config" content="/assets/images/favicon/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+  <!-- Favicon -->
+
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  
+    <script type="text/javascript">
+  window.addEventListener('load', themeChange);
+  const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+  if (currentTheme)
+    document.documentElement.setAttribute('data-theme', currentTheme);
+
+  function themeChange() {
+    let button = document.querySelector('.theme-toggle');
+
+    button.addEventListener('click', function (e) {
+      let currentTheme = document.documentElement.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        transition();
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        transition();
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+
+    let transition = () => {
+      document.documentElement.classList.add('transition');
+      window.setTimeout(() => {
+        document.documentElement.classList.remove('transition');
+      }, 1000);
+    }
+  }
+</script>
+
+
+  
+</head>
+<body>
+    <main class="page-content" aria-label="Content">
+      <div class="w">
+        <a href="/" style="display:inline-flex;align-items:center;gap:0.4em;">
+  <svg width="18" height="18" viewBox="0 0 20 20" fill="none" style="vertical-align:middle;">
+    <path d="M12.5 15L8 10.5L12.5 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  Home
+</a>
+<h1 class="post-title">PersonaGraph: An Agentic Solution for Executive Profile Generation with Generative AI and Web Search</h1>
+
+  <p class="post-date text-bold">
+  
+  
+    <span class="text-upcase">June 2025</span>
+  
+
+
+  
+  
+  (616 Words, 
+  4 Minutes)
+  
+
+</p>
+
+<div class="soopr-btn"
+   data-twitter="SooprCo"
+>
+</div>
+
+
+  <div class="">
+    
+  </div>
+
+
+
+<p>Manually gathering executive intelligence is a time-consuming and often incomplete endeavor. PersonaGraph automates this process, generating in-depth executive profiles with speed and precision. This article explores PersonaGraph’s backend architecture, built with Generative AI, LangGraph, and multi-agent systems. We will detail the agentic workflow that powers its insights and highlight key features of its user interface. Discover how PersonaGraph transforms executive research.</p>
+
+<h2 id="backend-langgraph-agentic-framework">Backend: LangGraph Agentic Framework</h2>
+
+<p>PersonaGraph’s intelligence stems from its sophisticated agentic engine. Which leverages LangGraph, a powerful framework for orchestrating multi-agent workflows. LangGraph’s graph-based architecture, detailed in <code class="language-plaintext highlighter-rouge">graph.py</code>, defines each agent as a node and the sequence of operations as edges. A shared <code class="language-plaintext highlighter-rouge">AgentState</code> ensures coherent data flow across the system.</p>
+
+<p>The lifecycle of an agent, exemplified by the <strong>BackgroundAgent</strong>, typically involves a series of coordinated steps, often structured as internal subgraphs. This begins with Query Generation, where a Large Language Model (LLM) formulates targeted search queries. Next, Data Acquisition employs web search tools to gather initial information. The subsequent Content Scraping phase utilizes a multi-scraper strategy, combining different techniques to extract text from diverse web sources. Information Filtering then employs another LLM to sift through the scraped content, retaining only the most relevant details. Finally, Information Synthesis sees an LLM consolidate these details into a coherent narrative.</p>
+
+<p>PersonaGraph deploys several specialized agents, each focusing on a distinct aspect of the executive profile:</p>
+<ul>
+  <li><strong>BackgroundAgent:</strong> Uncovers career history and educational background.</li>
+  <li><strong>LeadershipAgent:</strong> Investigates leadership style and past roles.</li>
+  <li><strong>StrategyAgent:</strong> Analyzes business strategies and significant projects.</li>
+  <li><strong>ReputationAgent:</strong> Gathers insights into public perception and media presence.</li>
+</ul>
+
+<p>The orchestration of these agents within the main graph follows a carefully designed sequence. The <strong>PlannerAgent</strong> initiates the process, interpreting the user’s request and determining the scope of research. It then triggers the specialized agents (Background, Leadership, etc.) in a logical order. Finally, the <strong>ProfileAggregatorAgent</strong> collects the outputs from all preceding agents, synthesizing them into the comprehensive executive profile.</p>
+
+<p>This modular design, where each agent operates with a specific focus, enhances the quality of the generated profiles and contributes to the system’s scalability and resilience. Clear separation of concerns allows for easier maintenance, while inherent error handling within LangGraph ensures robust operation.</p>
+
+<h3 id="agentic-workflow-visualization">Agentic Workflow Visualization</h3>
+
+<p>Logic flow in the agentic workflow of PersonaGraph:</p>
+
+<p align="center">
+  <img src="/assets/images/GraphFlow.png" alt="PersonaGraph UI" style="display:block; margin:auto; max-width:80%;" />
+</p>
+
+<h2 id="ui-a-window-to-insights">UI: A Window to Insights</h2>
+
+<p>PersonaGraph’s user interface provides a clear and dynamic window into its powerful executive profiling capabilities. Built with a modern technology stack—React, ShadCN UI for polished components, Tailwind CSS for utility-first styling, and Framer Motion for smooth animations—the UI prioritizes both aesthetics and functionality.</p>
+
+<p><strong>PersonaGraph UI Snapshot displaying a generated executive profile:</strong></p>
+<p align="center">
+  <img src="/assets/images/profile-snapshot.png" alt="PersonaGraph UI" style="display:block; margin:auto; max-width:90%;" />
+</p>
+
+<p>The core interaction begins with a simple input form where users specify the target executive. Upon submission, a WebSocket connection is established with the backend, enabling real-time communication as the agentic engine works.</p>
+
+<p>A key feature is the live streaming of progress. Users observe agents working sequentially, with updates displayed through dedicated progress indicators and the main results area. Data populates incrementally, offering immediate insights rather than a long wait for the final report.</p>
+
+<p>Once all agents complete their tasks, the final aggregated profile is presented. This comprehensive summary is rendered from Markdown for clarity. Further details are neatly organized within an accordion structure, providing access to “Detailed Insights” from individual agents and a list of “References” used during research.</p>
+
+<p>The interface also includes valuable features such as a Profile Library. It also allows users to save, manage, and quickly access previously generated executive profiles. Notably, it supports saving multiple versions for the same executive, enabling users to track and manage changes or explore and enrich different facets of a profile over time. These features coupled with an intuitive sidebar for navigation, enhances research efficiency and provides a full picture of the executive’s professional landscape.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>PersonaGraph demonstrates the power of an intelligently orchestrated, multi-agent system for complex information gathering. Its effective use of LangGraph for agent coordination, coupled with specialized agents for focused research, sets a new standard in automated executive profiling. The integration of Large Language Models for query generation, data filtering, and synthesis, alongside a real-time streaming user interface, showcases a sophisticated approach to data processing and presentation.</p>
+
+<p>For recruiters, investors, and analysts, PersonaGraph offers a significant leap in efficiency and depth, transforming manual research into a streamlined, insightful experience. It delivers comprehensive executive profiles quickly and reliably.</p>
+
+<p>Systems like PersonaGraph highlight the evolving potential of agentic AI, paving the way for increasingly autonomous and intelligent solutions to complex, real-world challenges. The journey of automated insight generation is just beginning.</p>
+
+<p>Want to check the code and dig deeper? Check out the full project on my <a href="https://github.com/rnepal2/persona-graph">GitHub repo</a>!</p>
+
+
+
+<div style="width:60%; display:flex; justify-content:center; align-items:center; margin-top:2em; margin-bottom:1em;">
+  <img src="/assets/images/favicon/android-icon-192x192.png" alt="Site Icon" style="width:48px; height:48px; margin-right:0.7em;" />
+  <span style="font-size:1.1em; font-family: 'Inter', sans-serif; color: var(--text);">
+    &copy; <strong>Rabindra Nepal</strong>
+  </span>
+</div>
+
+        
+          <button title="Toggle Theme" class="theme-toggle">
+  <svg viewBox="0 0 32 32" width="24" height="24" fill="currentcolor">
+    <circle cx="16" cy="16" r="14" fill="none" stroke="currentcolor" stroke-width="4"></circle>
+    <path d="
+             M 16 0
+             A 16 16 0 0 0 16 32
+             z">
+    </path>
+  </svg>
+</button>
+
+        
+        <div class="credits">&copy;&nbsp;2025&nbsp;
+          &nbsp;
+          •
+          &nbsp;
+          Theme&nbsp; <a href="https://github.com/abhinavs/moonwalk" target="_blank" rel="noreferrer">Moonwalk</a>
+        </div>
+      </div>
+    </main>
+
+    
+  </body>
+</html>
