@@ -11,11 +11,6 @@ navbar_entries:
     url: contact
 
 project_entries:
-  - title: PersonaGraph-Executive-Profile-Generator
-    url: /projects/2025/06/14/Persona-Graph-Generate-Executive-Profile-with-Web-Search-and-Generative-AI.html
-    desc: An Agenetic Solution for Executive Profile Generation
-    highlight: Agents
-
   - title: Molecular-Solubility-Prediction-with-GCN
     url: /projects/2025/05/31/Molecular-Solubility-Prediction-with-GCN.html
     desc: A comparative study of aqueous solubility prediction with QSPR vs GCN
