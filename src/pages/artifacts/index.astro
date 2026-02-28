@@ -1,0 +1,33 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import Container from "@components/Container.astro";
+import ArrowCard from "@components/ArrowCard.astro";
+import { ARTIFACTS } from "@consts";
+
+const projects = (await getCollection("projects"))
+  .filter(project => !project.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+
+<PageLayout title={ARTIFACTS.TITLE} description={ARTIFACTS.DESCRIPTION}>
+  <Container>
+    <div class="space-y-10">
+      <div class="animate font-semibold text-black dark:text-white">
+        Artifacts
+      </div>
+      <p class="animate text-sm italic opacity-75">
+        Finite constructions from infinite curiosity — projects in data science, ML, and AI.
+      </p>
+      <ul class="animate flex flex-col gap-4">
+        {
+          projects.map((project) => (
+            <li>
+              <ArrowCard entry={project} basePath="artifacts" />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Container>
+</PageLayout>

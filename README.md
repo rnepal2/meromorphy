@@ -1,28 +1,21 @@
 # Meromorphy
 
-This is the source code for [Meromorphy](https://rnepal2.github.io/meromorphy/), a personal website and blog built with [Jekyll](https://jekyllrb.com/) and hosted on GitHub Pages.
+A personal website built with [Astro](https://astro.build) using the [Astro Nano](https://github.com/markhorn-dev/astro-nano) template.
 
-## Features
+## Development
 
-- Custom Jekyll theme (local, not remote)
-- Blog, about, and project sections
-- Responsive and dark-mode enabled
-
-## Local Development
-
-To run locally:
-
-```sh
-bundle install
-bundle exec jekyll serve
+```bash
+npm install
+npm run dev
 ```
 
-Then visit [http://localhost:4000/meromorphy/](http://localhost:4000/meromorphy/).
+## Build
+
+```bash
+npm run build
+npm run preview
+```
 
 ## Deployment
 
-This site is deployed automatically via GitHub Pages from the `main` branch.
-
-### Jekyll Theme
-
-This site is based on the [Moonwalk](https://github.com/abhinavs/moonwalk) Jekyll theme.
+Deployed automatically to GitHub Pages via GitHub Actions on push to `main`.
