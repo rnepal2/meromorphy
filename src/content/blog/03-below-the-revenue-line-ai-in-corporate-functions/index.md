@@ -94,3 +94,5 @@ In revenue units, AI changes how companies sell or discover. In corporate functi
 That transformation may be quieter. But it is likely to be deeper — because corporate functions govern how people are hired, evaluated, compensated, and supported, and how organizations interpret risk, policy, and accountability.
 
 The shift may be gradual. It is unlikely to be temporary.
+
+*(Used Nano Banana 2 for visual illustration and GPT-5.2 for text refinement)*
