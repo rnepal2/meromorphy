@@ -37,18 +37,44 @@ footer {
   @apply py-5 text-sm;
 }
 
-article {
+.prose-content {
   @apply max-w-full prose dark:prose-invert prose-img:mx-auto prose-img:my-auto;
   @apply prose-headings:font-semibold prose-p:font-serif;
   @apply prose-headings:text-black prose-headings:dark:text-white;
 }
 
+.prose-content > :where(p, ul, ol, blockquote, h1, h2, h3, h4, h5, h6, hr) {
+  max-width: 76ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Custom blockquote styling */
-article blockquote,
-blockquote {
+.prose-content blockquote {
   @apply border-l-4 border-black/20 dark:border-white/20;
   @apply bg-black/[0.03] dark:bg-white/[0.03];
   @apply px-4 py-3 rounded-r-md;
+}
+
+.interactive-residue {
+  @apply my-10 max-w-none;
+}
+
+.interactive-residue-frame {
+  @apply block w-full overflow-hidden rounded-lg border border-black/15 bg-stone-100 dark:border-white/20 dark:bg-stone-950;
+  height: 1720px;
+}
+
+@media (max-width: 820px) {
+  .interactive-residue-frame {
+    height: 2640px;
+  }
+}
+
+@media (max-width: 420px) {
+  .interactive-residue-frame {
+    height: 2860px;
+  }
 }
 
 /* Text selection color */
@@ -57,12 +83,12 @@ blockquote {
 }
 
 @layer utilities {
-  article a {
+  .prose-content a {
     @apply font-sans text-current underline underline-offset-2;
     @apply decoration-black/15 dark:decoration-white/30;
     @apply transition-colors duration-300 ease-in-out;
   }
-  article a:hover {
+  .prose-content a:hover {
     @apply text-black dark:text-white;
     @apply decoration-black/25 dark:decoration-white/50;
   }

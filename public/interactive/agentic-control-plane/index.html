@@ -1,0 +1,1383 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Agentic Control Plane for Corporate Functions</title>
+    <script>
+      (() => {
+        const media = window.matchMedia("(prefers-color-scheme: dark)");
+        let source = "system";
+
+        function applyTheme(theme) {
+          source = theme === "light" || theme === "dark" ? "site" : "system";
+          const resolved = theme === "dark" || (theme === "system" && media.matches) ? "dark" : "light";
+
+          document.documentElement.dataset.theme = resolved;
+          document.documentElement.style.colorScheme = resolved;
+        }
+
+        function parentTheme() {
+          try {
+            if (!window.parent || window.parent === window) return null;
+            return window.parent.document.documentElement.classList.contains("dark") ? "dark" : "light";
+          } catch {
+            return null;
+          }
+        }
+
+        applyTheme(parentTheme() || (media.matches ? "dark" : "light"));
+
+        media.addEventListener("change", (event) => {
+          if (source === "system") {
+            applyTheme(event.matches ? "dark" : "light");
+          }
+        });
+
+        window.addEventListener("message", (event) => {
+          if (event.data?.type !== "meromorphy:theme") return;
+          applyTheme(event.data.theme);
+        });
+
+        window.addEventListener("DOMContentLoaded", () => {
+          if (window.parent && window.parent !== window) {
+            window.parent.postMessage({ type: "meromorphy:theme-ready" }, "*");
+          }
+        });
+      })();
+    </script>
+    <style>
+:root {
+  color-scheme: light;
+  --ink: #18212b;
+  --muted: #5e6a78;
+  --soft: #eef2f4;
+  --paper: #f4f0e8;
+  --panel: #ffffff;
+  --teal: #159c91;
+  --blue: #346fc4;
+  --violet: #8060c9;
+  --amber: #c88422;
+  --red: #c84f4f;
+  --green: #277f70;
+  --line: rgba(24, 33, 43, 0.12);
+  --shadow: 0 10px 32px rgba(24, 33, 43, 0.09);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--ink);
+  letter-spacing: 0;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.74), rgba(244, 240, 232, 0.94)),
+    repeating-linear-gradient(90deg, rgba(24, 33, 43, 0.035) 0 1px, transparent 1px 80px),
+    var(--paper);
+}
+
+button {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3 {
+  margin-top: 0;
+}
+
+.page-shell {
+  width: min(940px, calc(100vw - 24px));
+  margin: 0 auto;
+  padding: 16px 0 40px;
+}
+
+.thesis-card,
+.interactive-card {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.eyebrow {
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-size: 0.62rem;
+  line-height: 1.15;
+  font-weight: 850;
+  letter-spacing: 0;
+}
+
+.thesis-card {
+  padding: 13px 14px 14px;
+  display: grid;
+  gap: 11px;
+}
+
+.thesis-header {
+  padding-left: 12px;
+  border-left: 5px solid var(--teal);
+}
+
+.thesis-header h1 {
+  max-width: 760px;
+  margin-bottom: 6px;
+  font-size: clamp(1.18rem, 2.5vw, 1.76rem);
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+
+.thesis-header p:last-child {
+  max-width: 790px;
+  margin-bottom: 0;
+  color: #344353;
+  font-size: 0.82rem;
+  line-height: 1.36;
+}
+
+.thesis-steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.thesis-steps div {
+  min-height: 86px;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.thesis-steps strong,
+.thesis-steps span {
+  display: block;
+}
+
+.thesis-steps strong {
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+}
+
+.thesis-steps span {
+  color: #405060;
+  font-size: 0.82rem;
+  line-height: 1.32;
+}
+
+.use-case-band {
+  padding: 12px 14px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(230px, 275px);
+  gap: 12px;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(21, 156, 145, 0.12), transparent 38%),
+    linear-gradient(315deg, rgba(200, 132, 34, 0.14), transparent 42%),
+    rgba(255, 255, 255, 0.92);
+}
+
+.use-case-copy h2 {
+  margin-bottom: 6px;
+  max-width: 620px;
+  font-size: clamp(1.05rem, 2vw, 1.28rem);
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+.use-case-copy p {
+  max-width: 620px;
+  margin-bottom: 0;
+  color: #344353;
+  font-size: 0.78rem;
+  line-height: 1.34;
+}
+
+.use-case-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) 34px;
+  gap: 8px;
+  align-items: center;
+}
+
+.case-pill {
+  min-height: 48px;
+  padding: 8px 9px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.84);
+}
+
+.case-pill span,
+.case-pill strong {
+  display: block;
+}
+
+.case-pill span {
+  margin-bottom: 3px;
+  color: var(--muted);
+  text-transform: uppercase;
+  font-size: 0.56rem;
+  line-height: 1.1;
+  font-weight: 850;
+}
+
+.case-pill strong {
+  font-size: 0.72rem;
+  line-height: 1.16;
+}
+
+.phase-status {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.tier-chip,
+.mode-chip {
+  display: inline-flex;
+  min-height: 26px;
+  align-items: center;
+  padding: 5px 9px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  font-size: 0.72rem;
+  font-weight: 850;
+}
+
+.tier-chip.t1,
+.tier-chip.t2 {
+  color: #126b62;
+}
+
+.tier-chip.t3 {
+  color: #8b5a13;
+}
+
+.tier-chip.t4,
+.tier-chip.t5 {
+  color: #a63d3d;
+}
+
+.play-button {
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 900;
+  cursor: pointer;
+}
+
+.interactive-card {
+  margin-top: 10px;
+  padding: 14px;
+}
+
+.interactive-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(360px, 390px);
+  gap: 12px;
+  align-items: stretch;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.interactive-head h2 {
+  max-width: 620px;
+  margin-bottom: 0;
+  font-size: clamp(1.12rem, 2.2vw, 1.5rem);
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+
+.workflow-principle {
+  min-width: min(100%, 360px);
+  padding: 10px 11px;
+  border: 1px solid rgba(21, 156, 145, 0.24);
+  border-radius: 8px;
+  background: #eef9f7;
+}
+
+.workflow-principle strong,
+.workflow-principle span {
+  display: block;
+}
+
+.workflow-principle strong {
+  margin-bottom: 4px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+}
+
+.workflow-principle span {
+  color: #344353;
+  font-size: 0.72rem;
+  line-height: 1.3;
+}
+
+.runtime-dock {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 9px;
+}
+
+.runtime-module {
+  min-height: 124px;
+  padding: 11px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.runtime-copy {
+  min-width: 0;
+}
+
+.runtime-title {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 7px;
+}
+
+.runtime-title strong {
+  font-size: 0.86rem;
+  line-height: 1.16;
+}
+
+.runtime-mark {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+  align-self: center;
+  border-radius: 11px;
+  background: #f3f5f5;
+  color: #526170;
+  border: 1px solid rgba(24, 33, 43, 0.14);
+  font-weight: 950;
+  font-size: 1.5rem;
+  flex: 0 0 48px;
+  line-height: 1;
+  text-align: center;
+  overflow: hidden;
+}
+
+.runtime-module.hermes .runtime-mark {
+  font-size: 1.58rem;
+}
+
+.runtime-glyph {
+  display: block;
+  line-height: 1;
+  transform: translateY(1px);
+}
+
+.runtime-module.openclaw .runtime-glyph {
+  transform: translateY(2px);
+}
+
+.runtime-module.enterprise .runtime-glyph {
+  transform: translateY(0);
+}
+
+.runtime-copy p,
+.runtime-copy span {
+  display: block;
+}
+
+.runtime-copy p {
+  margin-bottom: 6px;
+  color: #344353;
+  font-size: 0.72rem;
+  line-height: 1.28;
+}
+
+.runtime-copy span {
+  color: #526170;
+  font-size: 0.7rem;
+  line-height: 1.28;
+}
+
+.workbench {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.timeline-panel {
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+}
+
+.phase-button {
+  width: 100%;
+  min-width: 136px;
+  min-height: 48px;
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+  padding: 7px;
+  text-align: left;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.phase-button.active {
+  border-color: var(--teal);
+  background: #edf9f7;
+  box-shadow: inset 4px 0 0 var(--teal);
+}
+
+.phase-index {
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--soft);
+  font-weight: 900;
+  font-size: 0.64rem;
+}
+
+.phase-copy strong,
+.phase-copy small {
+  display: block;
+}
+
+.phase-copy strong {
+  font-size: 0.78rem;
+}
+
+.phase-copy small {
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 0.67rem;
+}
+
+.map-panel {
+  min-width: 0;
+}
+
+.map-wrap {
+  position: relative;
+  min-height: 590px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(249, 250, 248, 0.98)),
+    linear-gradient(90deg, rgba(24, 33, 43, 0.045) 1px, transparent 1px),
+    linear-gradient(rgba(24, 33, 43, 0.045) 1px, transparent 1px);
+  background-size: auto, 46px 46px, 46px 46px;
+}
+
+.network-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.network-lines line {
+  vector-effect: non-scaling-stroke;
+  stroke-width: 2;
+}
+
+.line-idle {
+  stroke: rgba(24, 33, 43, 0.13);
+}
+
+.line-active {
+  stroke: rgba(21, 156, 145, 0.78);
+  stroke-dasharray: 6 8;
+  animation: dash 1.6s linear infinite;
+}
+
+@keyframes dash {
+  to { stroke-dashoffset: -28; }
+}
+
+.center-core {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  width: min(280px, 44%);
+  min-height: 158px;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 8px;
+  padding: 17px;
+  border-radius: 8px;
+  text-align: center;
+  background: var(--ink);
+  color: #fff;
+  box-shadow: 0 18px 46px rgba(24, 33, 43, 0.3);
+}
+
+.center-core span {
+  color: #a9e4dc;
+  text-transform: uppercase;
+  font-size: 0.66rem;
+  font-weight: 900;
+}
+
+.center-core strong {
+  font-size: 1.04rem;
+  line-height: 1.1;
+}
+
+.center-core i {
+  color: #cbd3dc;
+  font-size: 0.76rem;
+  font-style: normal;
+  line-height: 1.25;
+}
+
+.human-gate {
+  padding: 4px 7px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  font-size: 0.66rem;
+  font-weight: 850;
+  line-height: 1;
+}
+
+.core-runtime {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.core-runtime b {
+  width: 24px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 7px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #dce7ee;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.78rem;
+  line-height: 1;
+  font-style: normal;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.core-runtime b:nth-child(2) {
+  font-size: 0.86rem;
+}
+
+.agent-node {
+  position: absolute;
+  width: 172px;
+  min-height: 92px;
+  transform: translate(-50%, -50%);
+  padding: 12px;
+  border: 2px solid rgba(24, 33, 43, 0.12);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 12px 30px rgba(24, 33, 43, 0.1);
+  transition: transform 220ms ease, border-color 220ms ease, background 220ms ease;
+}
+
+.agent-node.hot {
+  border-color: var(--agent-color);
+  background: color-mix(in srgb, var(--agent-color) 10%, white);
+  transform: translate(-50%, -50%) scale(1.035);
+}
+
+.agent-node strong,
+.agent-node span {
+  display: block;
+}
+
+.agent-node strong {
+  margin-bottom: 5px;
+  font-size: 0.95rem;
+}
+
+.agent-node span {
+  color: #4d5b68;
+  font-size: 0.76rem;
+  line-height: 1.24;
+}
+
+.agent-node em {
+  display: inline-flex;
+  margin-top: 7px;
+  padding: 3px 6px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--agent-color) 10%, white);
+  color: #394858;
+  font-size: 0.6rem;
+  line-height: 1;
+  font-style: normal;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
+.pulse-dot {
+  position: absolute;
+  left: 50%;
+  top: 52%;
+  width: 11px;
+  height: 11px;
+  transform: translate(-50%, -50%);
+  border-radius: 999px;
+  background: var(--teal);
+  opacity: 0.78;
+}
+
+.pulse-dot.one {
+  animation: packet-one 5.2s linear infinite;
+}
+
+.pulse-dot.two {
+  animation: packet-two 5.2s linear infinite;
+  animation-delay: 1.3s;
+  background: var(--amber);
+}
+
+.pulse-dot.three {
+  animation: packet-three 5.2s linear infinite;
+  animation-delay: 2.6s;
+  background: var(--violet);
+}
+
+@keyframes packet-one {
+  0%, 100% { left: 50%; top: 52%; }
+  38% { left: 82%; top: 32%; }
+  70% { left: 50%; top: 52%; }
+}
+
+@keyframes packet-two {
+  0%, 100% { left: 50%; top: 52%; }
+  38% { left: 18%; top: 74%; }
+  70% { left: 50%; top: 52%; }
+}
+
+@keyframes packet-three {
+  0%, 100% { left: 50%; top: 52%; }
+  38% { left: 82%; top: 74%; }
+  70% { left: 50%; top: 52%; }
+}
+
+.phase-detail {
+  display: grid;
+  grid-template-columns: 90px repeat(2, minmax(0, 1fr));
+  align-content: start;
+  gap: 9px;
+  min-width: 0;
+}
+
+.detail-block,
+.detail-grid {
+  padding: 11px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.detail-block.highlighted {
+  border-color: rgba(21, 156, 145, 0.28);
+  background: #eef9f7;
+}
+
+.detail-block p:last-child {
+  margin-bottom: 0;
+  color: #344353;
+  font-size: 0.82rem;
+  line-height: 1.34;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-column: 1 / -1;
+  gap: 11px;
+}
+
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.chip-list span {
+  display: inline-flex;
+  min-height: 26px;
+  align-items: center;
+  padding: 5px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: #fff;
+  color: #394858;
+  font-size: 0.66rem;
+  font-weight: 760;
+}
+
+.chip-list.output span {
+  background: #f8f4ec;
+}
+
+.architecture-stack {
+  margin-top: 12px;
+  padding: 12px;
+  display: grid;
+  grid-template-columns: minmax(180px, 235px) minmax(0, 1fr);
+  gap: 12px;
+  align-items: stretch;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background:
+    linear-gradient(90deg, rgba(24, 33, 43, 0.03), transparent 42%),
+    rgba(255, 255, 255, 0.74);
+}
+
+.stack-head {
+  display: grid;
+  align-content: center;
+}
+
+.stack-head h2 {
+  margin-bottom: 0;
+  font-size: clamp(0.98rem, 1.5vw, 1.18rem);
+  line-height: 1.14;
+  letter-spacing: 0;
+}
+
+html[data-theme="dark"] {
+  --ink: #edf2f7;
+  --muted: #9aa8b6;
+  --soft: #202a34;
+  --paper: #151311;
+  --panel: #1b222b;
+  --line: rgba(236, 242, 248, 0.14);
+  --shadow: 0 16px 46px rgba(0, 0, 0, 0.34);
+}
+
+html[data-theme="dark"] body {
+  color: var(--ink);
+  background:
+    linear-gradient(180deg, rgba(27, 24, 21, 0.96), rgba(17, 19, 23, 0.98)),
+    repeating-linear-gradient(90deg, rgba(236, 242, 248, 0.035) 0 1px, transparent 1px 80px),
+    var(--paper);
+}
+
+html[data-theme="dark"] .thesis-card,
+html[data-theme="dark"] .interactive-card,
+html[data-theme="dark"] .thesis-steps div,
+html[data-theme="dark"] .case-pill,
+html[data-theme="dark"] .tier-chip,
+html[data-theme="dark"] .mode-chip,
+html[data-theme="dark"] .phase-button,
+html[data-theme="dark"] .map-panel,
+html[data-theme="dark"] .detail-block,
+html[data-theme="dark"] .detail-grid,
+html[data-theme="dark"] .runtime-module {
+  border-color: var(--line);
+  background: rgba(27, 34, 43, 0.9);
+  color: var(--ink);
+}
+
+html[data-theme="dark"] .thesis-header p:last-child,
+html[data-theme="dark"] .thesis-steps span,
+html[data-theme="dark"] .use-case-copy p,
+html[data-theme="dark"] .workflow-principle span,
+html[data-theme="dark"] .phase-button small,
+html[data-theme="dark"] .agent-node span,
+html[data-theme="dark"] .detail-block p:last-child,
+html[data-theme="dark"] .runtime-copy p,
+html[data-theme="dark"] .runtime-copy span {
+  color: #c4ced8;
+}
+
+html[data-theme="dark"] .eyebrow,
+html[data-theme="dark"] .phase-button:not(.active) .phase-copy small {
+  color: var(--muted);
+}
+
+html[data-theme="dark"] .use-case-band {
+  border-color: var(--line);
+  background:
+    linear-gradient(135deg, rgba(21, 156, 145, 0.2), transparent 38%),
+    linear-gradient(315deg, rgba(200, 132, 34, 0.18), transparent 42%),
+    rgba(28, 34, 42, 0.92);
+}
+
+html[data-theme="dark"] .interactive-head,
+html[data-theme="dark"] .timeline-panel {
+  border-color: var(--line);
+}
+
+html[data-theme="dark"] .workflow-principle,
+html[data-theme="dark"] .detail-block.highlighted,
+html[data-theme="dark"] .phase-button.active {
+  border-color: rgba(45, 212, 191, 0.42);
+  background: rgba(15, 118, 110, 0.24);
+}
+
+html[data-theme="dark"] .phase-index {
+  border-color: rgba(236, 242, 248, 0.12);
+  background: #26313c;
+  color: #dce6ee;
+}
+
+html[data-theme="dark"] .map-wrap {
+  background:
+    linear-gradient(180deg, rgba(22, 28, 35, 0.74), rgba(19, 22, 27, 0.98)),
+    linear-gradient(90deg, rgba(236, 242, 248, 0.04) 1px, transparent 1px),
+    linear-gradient(rgba(236, 242, 248, 0.04) 1px, transparent 1px);
+  background-size: auto, 46px 46px, 46px 46px;
+}
+
+html[data-theme="dark"] .network-lines .line-idle {
+  stroke: rgba(236, 242, 248, 0.16);
+}
+
+html[data-theme="dark"] .center-core {
+  background: #101820;
+  color: #f8fafc;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.42);
+}
+
+html[data-theme="dark"] .center-core i {
+  color: #d2dce6;
+}
+
+html[data-theme="dark"] .agent-node {
+  border-color: rgba(236, 242, 248, 0.14);
+  background: rgba(27, 34, 43, 0.94);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+}
+
+html[data-theme="dark"] .agent-node.hot {
+  border-color: var(--agent-color);
+  background: color-mix(in srgb, var(--agent-color) 24%, #1b222b);
+}
+
+html[data-theme="dark"] .agent-node em,
+html[data-theme="dark"] .chip-list span {
+  color: #dbe3ec;
+  background: rgba(236, 242, 248, 0.08);
+}
+
+html[data-theme="dark"] .chip-list.output span {
+  background: rgba(200, 132, 34, 0.16);
+}
+
+html[data-theme="dark"] .architecture-stack {
+  border-color: var(--line);
+  background:
+    linear-gradient(90deg, rgba(236, 242, 248, 0.04), transparent 42%),
+    rgba(27, 34, 43, 0.82);
+}
+
+@media (max-width: 1180px) {
+  .thesis-card,
+  .use-case-band,
+  .interactive-head,
+  .architecture-stack {
+    grid-template-columns: 1fr;
+  }
+
+  .runtime-dock {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .phase-button {
+    min-width: 150px;
+  }
+}
+
+@media (max-width: 820px) {
+  .page-shell {
+    width: min(100vw - 20px, 720px);
+    padding-top: 10px;
+  }
+
+  .thesis-header h1 {
+    font-size: clamp(1.28rem, 7vw, 1.9rem);
+  }
+
+  .thesis-steps,
+  .runtime-dock {
+    grid-template-columns: 1fr;
+  }
+
+  .runtime-module {
+    min-height: 132px;
+  }
+
+  .runtime-title {
+    grid-template-columns: 52px minmax(0, 1fr);
+  }
+
+  .map-wrap {
+    min-height: 790px;
+  }
+
+  .center-core {
+    width: min(250px, 74%);
+    top: 53% !important;
+  }
+
+  .agent-node {
+    width: 146px;
+    min-height: 94px;
+    padding: 11px;
+  }
+
+  .phase-detail,
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .agent-node.agent-procurement {
+    left: 74% !important;
+    top: 30% !important;
+  }
+
+  .agent-node.agent-compliance {
+    left: 26% !important;
+    top: 30% !important;
+  }
+
+  .agent-node.agent-security {
+    left: 26% !important;
+    top: 73% !important;
+  }
+
+  .agent-node.agent-legal {
+    left: 74% !important;
+    top: 73% !important;
+  }
+
+  .agent-node.agent-finance {
+    top: 90% !important;
+  }
+}
+
+@media (max-width: 420px) {
+  .workflow-principle {
+    min-width: 0;
+  }
+
+  .workflow-principle strong {
+    font-size: 0.76rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+const { useEffect, useMemo, useState } = React;
+
+const runtimeModules = [
+  {
+    id: "openclaw",
+    mark: "🦞",
+    name: "OpenClaw-style gateway",
+    role: "Gateway for channels, sessions, tool events, and isolated agent routing.",
+    enterpriseUse: "Routes a vendor request into a controlled work object.",
+    color: "#159c91"
+  },
+  {
+    id: "hermes",
+    mark: "☤",
+    name: "Hermes-style agent OS",
+    role: "Memory, skills, MCP tools, scheduled work, and delegated subagents.",
+    enterpriseUse: "Runs specialist workers under bounded context and tools.",
+    color: "#8060c9"
+  },
+  {
+    id: "enterprise",
+    mark: "E",
+    name: "Enterprise control layer",
+    role: "Identity, approval gates, policy-as-code, audit, and rollback.",
+    enterpriseUse: "Sets what agents can see, change, escalate, and prove.",
+    color: "#c88422"
+  }
+];
+
+const agents = [
+  { id: "intake", label: "Intake", job: "Classify request. Create work object.", owner: "Requester", x: 50, y: 13, color: "#159c91" },
+  { id: "procurement", label: "Procurement", job: "Vendor record. Sourcing context.", owner: "Procurement", x: 84, y: 28, color: "#346fc4" },
+  { id: "legal", label: "Legal", job: "Contract exception and fallback terms.", owner: "Counsel", x: 84, y: 76, color: "#8060c9" },
+  { id: "finance", label: "Finance", job: "Budget, tax, payment controls.", owner: "Controller", x: 50, y: 89, color: "#c88422" },
+  { id: "security", label: "Security", job: "Data risk and security addendum.", owner: "ISRM", x: 16, y: 76, color: "#c84f4f" },
+  { id: "compliance", label: "Compliance", job: "Policy fit and exception flags.", owner: "Compliance", x: 16, y: 28, color: "#277f70" }
+];
+
+const phases = [
+  {
+    id: "request",
+    label: "Request",
+    mode: "Draft",
+    tier: "T1",
+    activeAgents: ["intake", "procurement"],
+    short: "New vendor enters intake.",
+    current: "The request, contract attachment, security questionnaire, and email thread start as separate artifacts.",
+    future: "The intake agent creates one governed vendor work object and classifies it as employee-data sensitive.",
+    guardrails: ["Requester Authority", "Data Classification", "Workflow Owner"],
+    outputs: ["Vendor Work Object", "Sensitivity Tag", "Owner"]
+  },
+  {
+    id: "screen",
+    label: "Screen",
+    mode: "Execute",
+    tier: "T2",
+    activeAgents: ["procurement", "compliance", "security"],
+    short: "Vendor checks run in parallel.",
+    current: "Procurement, security, and compliance ask the business and the vendor for overlapping evidence.",
+    future: "Specialist agents check the vendor and flag whether the exception changes data, policy, or third-party risk.",
+    guardrails: ["Approved Sources", "Tool Allowlists", "Exception Flag"],
+    outputs: ["Vendor Check", "Risk Flags", "Exception Scope"]
+  },
+  {
+    id: "redline",
+    label: "Redline",
+    mode: "Recommend",
+    tier: "T3",
+    activeAgents: ["legal", "security", "compliance"],
+    short: "Contract exception becomes a decision packet.",
+    current: "Legal receives the contract exception without a complete security, compliance, and business-risk trace.",
+    future: "Legal, security, and compliance agents assemble an exception packet with fallback language and unresolved risk.",
+    guardrails: ["Counsel Review", "ISRM Input", "Playbook Version"],
+    outputs: ["Clause Diff", "Fallback Terms", "Exception Packet"]
+  },
+  {
+    id: "fund",
+    label: "Fund",
+    mode: "Execute",
+    tier: "T2",
+    activeAgents: ["finance", "procurement", "compliance"],
+    short: "Finance enters before negotiation hardens.",
+    current: "Budget, tax, and payment controls are often checked after momentum builds.",
+    future: "Finance validates vendor setup, cost center, tax assumptions, approval matrix, and AP readiness before sign-off.",
+    guardrails: ["SoD Check", "Spend Threshold", "No Payment Release"],
+    outputs: ["Budget Status", "Tax Notes", "Approval Route"]
+  },
+  {
+    id: "approve",
+    label: "Approve",
+    mode: "Human gate",
+    tier: "T4",
+    activeAgents: ["procurement", "legal", "finance", "security", "compliance"],
+    short: "Humans decide; agents prove the trace.",
+    current: "Approval depends on meetings, forwarded files, and uneven confidence in who reviewed what.",
+    future: "The approver sees the vendor exception, evidence, alternatives, unresolved risk, and required sign-offs together.",
+    guardrails: ["Named Owner", "Exception Approval", "Retention Rule"],
+    outputs: ["Decision Record", "Approved Exception", "Sign-Offs"]
+  },
+  {
+    id: "activate",
+    label: "Activate",
+    mode: "Execute",
+    tier: "T2",
+    activeAgents: ["intake", "procurement", "finance", "security"],
+    short: "Approved actions execute through controlled APIs.",
+    current: "Vendor master, purchase order, access, and renewal obligations drift across systems.",
+    future: "Agents create vendor records, schedule reviews, and attach the trace to vendor and contract objects.",
+    guardrails: ["Approved APIs", "Rollback Plan", "Monitoring"],
+    outputs: ["Vendor Record", "PO Draft", "Review Calendar"]
+  }
+];
+
+function App() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [playing, setPlaying] = useState(true);
+  const active = phases[activeIndex];
+
+  useEffect(() => {
+    if (!playing) return;
+    const timer = setInterval(() => {
+      setActiveIndex((index) => (index + 1) % phases.length);
+    }, 5200);
+    return () => clearInterval(timer);
+  }, [playing]);
+
+  const activeAgentSet = useMemo(() => new Set(active.activeAgents), [active]);
+
+  return (
+    <main className="page-shell">
+      <ThinkingModel />
+
+      <section className="interactive-card" aria-label="Interactive agentic workflow model">
+        <UseCaseHeader active={active} playing={playing} setPlaying={setPlaying} />
+        <div className="interactive-head">
+          <div>
+            <p className="eyebrow">Live workflow model</p>
+            <h2>{active.label}: {active.short}</h2>
+          </div>
+          <div className="workflow-principle">
+            <strong>Agents prepare the decision. People own it.</strong>
+            <span>The workflow accelerates evidence, routing, redlines, and setup; approval stays with named owners.</span>
+          </div>
+        </div>
+
+        <div className="workbench">
+          <Timeline activeIndex={activeIndex} setActiveIndex={setActiveIndex} />
+          <WorkflowMap activeAgentSet={activeAgentSet} />
+          <PhaseDetail active={active} />
+        </div>
+
+        <ArchitectureStack />
+      </section>
+    </main>
+  );
+}
+
+function ThinkingModel() {
+  return (
+    <section className="thesis-card" aria-label="Thinking model">
+      <header className="thesis-header">
+        <h1>Agentic Corporate Functions Bounded by Authority</h1>
+        <p>
+          Agents can compress handoffs across legal, finance, procurement, security, and compliance, but every action still needs governed authority, evidence, and sign-off.
+        </p>
+      </header>
+      <div className="thesis-steps">
+        <div>
+          <strong>Capability</strong>
+          <span>Gather evidence, call approved tools, draft next actions.</span>
+        </div>
+        <div>
+          <strong>Authority</strong>
+          <span>Constrain data access, tool rights, budget, and legal scope.</span>
+        </div>
+        <div>
+          <strong>Accountability</strong>
+          <span>Assigned owners approve exceptions and carry residual risk.</span>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function UseCaseHeader({ active, playing, setPlaying }) {
+  return (
+    <section className="use-case-band" aria-label="Use case">
+      <div className="use-case-copy">
+        <p className="eyebrow">Use case · vendor onboarding</p>
+        <h2>Vendor onboarding with a contract exception.</h2>
+        <p>
+          A benefits analytics vendor touches employee data, payment setup, security review, and legal terms. Routine checks can move faster; exceptions stay owned.
+        </p>
+      </div>
+      <div className="use-case-controls">
+        <div className="case-pill">
+          <span>Process</span>
+          <strong>Vendor onboarding</strong>
+        </div>
+        <div className="case-pill">
+          <span>Active gate</span>
+          <strong>{active.tier} · {active.mode}</strong>
+        </div>
+        <div>
+          <button
+            className="play-button"
+            type="button"
+            aria-label={playing ? "Pause sequence" : "Play sequence"}
+            title={playing ? "Pause sequence" : "Play sequence"}
+            onClick={() => setPlaying((value) => !value)}
+          >
+            {playing ? "||" : ">"}
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ArchitectureStack() {
+  return (
+    <section className="architecture-stack" aria-label="Technology stack">
+      <div className="stack-head">
+        <p className="eyebrow">Architecture translation</p>
+        <h2>Agent frameworks provide worker fabric. Enterprise controls provide authority.</h2>
+      </div>
+      <div className="runtime-dock">
+        {runtimeModules.map((module) => (
+          <article className={`runtime-module ${module.id}`} key={module.id}>
+            <div className="runtime-title">
+              <span className="runtime-mark" style={{ "--module-color": module.color }}>
+                <span className="runtime-glyph">{module.mark}</span>
+              </span>
+              <strong>{module.name}</strong>
+            </div>
+            <div className="runtime-copy">
+              <p>{module.role}</p>
+              <span>{module.enterpriseUse}</span>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function RuntimeMarkers() {
+  return (
+    <div className="core-runtime" aria-label="Runtime pattern markers">
+      {runtimeModules.map((module) => (
+        <b key={module.id} style={{ "--module-color": module.color }}>
+          {module.mark}
+        </b>
+      ))}
+    </div>
+  );
+}
+
+function Timeline({ activeIndex, setActiveIndex }) {
+  return (
+    <nav className="timeline-panel" aria-label="Workflow phases">
+      {phases.map((phase, index) => (
+        <button
+          key={phase.id}
+          type="button"
+          className={`phase-button ${index === activeIndex ? "active" : ""}`}
+          onClick={() => setActiveIndex(index)}
+        >
+          <span className="phase-index">{String(index + 1).padStart(2, "0")}</span>
+          <span className="phase-copy">
+            <strong>{phase.label}</strong>
+            <small>{phase.mode}</small>
+          </span>
+        </button>
+      ))}
+    </nav>
+  );
+}
+
+function WorkflowMap({ activeAgentSet }) {
+  return (
+    <section className="map-panel" aria-label="Agent workcell map">
+      <div className="map-wrap">
+        <svg className="network-lines" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          {agents.map((agent) => (
+            <line
+              key={agent.id}
+              x1="50"
+              y1="52"
+              x2={agent.x}
+              y2={agent.y}
+              className={activeAgentSet.has(agent.id) ? "line-active" : "line-idle"}
+            />
+          ))}
+        </svg>
+
+        <div className="center-core">
+          <span>Agent control plane</span>
+          <strong>Vendor onboarding orchestration</strong>
+          <i>Deploys specialist agents. Humans approve exceptions and irreversible actions.</i>
+          <div className="human-gate">Human Gate: Assigned Owner</div>
+          <RuntimeMarkers />
+        </div>
+
+        <div className="pulse-dot one" />
+        <div className="pulse-dot two" />
+        <div className="pulse-dot three" />
+
+        {agents.map((agent) => (
+          <div
+            key={agent.id}
+            className={`agent-node agent-${agent.id} ${activeAgentSet.has(agent.id) ? "hot" : ""}`}
+            style={{ left: `${agent.x}%`, top: `${agent.y}%`, "--agent-color": agent.color }}
+          >
+            <strong>{agent.label}</strong>
+            <span>{agent.job}</span>
+            <em>{agent.owner} sign-off</em>
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
+function PhaseDetail({ active }) {
+  return (
+    <aside className="phase-detail" aria-label="Selected workflow phase detail">
+      <div className="phase-status">
+        <span className={`tier-chip ${active.tier.toLowerCase()}`}>{active.tier}</span>
+        <span className="mode-chip">{active.mode}</span>
+      </div>
+
+      <div className="detail-block">
+        <p className="eyebrow">Today</p>
+        <p>{active.current}</p>
+      </div>
+
+      <div className="detail-block highlighted">
+        <p className="eyebrow">Agentic work</p>
+        <p>{active.future}</p>
+      </div>
+
+      <div className="detail-grid">
+        <div>
+          <p className="eyebrow">Controls</p>
+          <div className="chip-list">
+            {active.guardrails.map((item) => <span key={item}>{item}</span>)}
+          </div>
+        </div>
+        <div>
+          <p className="eyebrow">Outputs</p>
+          <div className="chip-list output">
+            {active.outputs.map((item) => <span key={item}>{item}</span>)}
+            <span>Agent Metadata</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+
+    </script>
+  </body>
+</html>

@@ -108,6 +108,13 @@ const { title, description, image = "/images/Meromorphy.png" } = Astro.props;
       toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
     });
 
+    document.querySelectorAll(".interactive-residue-frame").forEach((frame) => {
+      if (frame.dataset.themeSyncBound) return;
+      frame.dataset.themeSyncBound = "true";
+      frame.addEventListener("load", syncInteractiveResidueTheme);
+    });
+    syncInteractiveResidueTheme();
+
     window.matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", event => {
         if (localStorage.theme === "system") {
@@ -169,8 +176,22 @@ function toggleTheme(dark) {
       document.documentElement.classList.remove("dark");
     }
 
+    syncInteractiveResidueTheme();
+
   window.getComputedStyle(css).opacity;
     document.head.removeChild(css);
+  }
+
+  function syncInteractiveResidueTheme() {
+    const theme = document.documentElement.classList.contains("dark") ? "dark" : "light";
+    const targetOrigin = window.location.origin === "null" ? "*" : window.location.origin;
+
+    document.querySelectorAll(".interactive-residue-frame").forEach((frame) => {
+      frame.contentWindow?.postMessage(
+        { type: "meromorphy:theme", theme },
+        targetOrigin
+      );
+    });
   }
 
   function preloadTheme() {
