@@ -44,9 +44,10 @@ footer {
 }
 
 .prose-content > :where(p, ul, ol, blockquote, h1, h2, h3, h4, h5, h6, hr) {
-  max-width: 76ch;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 /* Custom blockquote styling */

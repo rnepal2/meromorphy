@@ -8,7 +8,7 @@ bare: true
 <figure class="interactive-residue not-prose" aria-label="Interactive agentic control plane model">
   <iframe
     class="interactive-residue-frame"
-    src="/interactive/agentic-control-plane/"
+    src="/interactive/agentic-control-plane/?v=20260514-local-bundle"
     title="Agentic control plane for corporate functions"
     loading="lazy"
   ></iframe>
