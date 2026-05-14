@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Agentic Control Plane for Corporate Functions</title>
+    <title>Agentic Corporate Functions Bounded by Authority</title>
     <script data-cfasync="false">
       (() => {
         const media = window.matchMedia("(prefers-color-scheme: dark)");
@@ -37,12 +37,49 @@
         window.addEventListener("message", (event) => {
           if (event.data?.type !== "meromorphy:theme") return;
           applyTheme(event.data.theme);
+          queueHeight();
         });
+
+        function measureHeight() {
+          const shell = document.querySelector(".page-shell");
+          const rect = shell?.getBoundingClientRect();
+          const height = rect ? rect.bottom : document.documentElement.scrollHeight;
+
+          return Math.ceil(height);
+        }
+
+        function postHeight() {
+          if (!window.parent || window.parent === window) return;
+          window.parent.postMessage(
+            { type: "meromorphy:interactive-height", height: measureHeight() },
+            "*"
+          );
+        }
+
+        function queueHeight() {
+          window.requestAnimationFrame(postHeight);
+        }
 
         window.addEventListener("DOMContentLoaded", () => {
           if (window.parent && window.parent !== window) {
             window.parent.postMessage({ type: "meromorphy:theme-ready" }, "*");
           }
+          queueHeight();
+
+          const target = document.querySelector("#root") || document.body;
+          if ("ResizeObserver" in window) {
+            const resizeObserver = new ResizeObserver(queueHeight);
+            resizeObserver.observe(target);
+          }
+
+          if ("MutationObserver" in window) {
+            const mutationObserver = new MutationObserver(queueHeight);
+            mutationObserver.observe(target, { childList: true, subtree: true });
+          }
+
+          window.addEventListener("resize", queueHeight);
+          window.setTimeout(queueHeight, 120);
+          window.setTimeout(queueHeight, 600);
         });
       })();
     </script>
@@ -174,7 +211,7 @@ h3 {
 .use-case-band {
   padding: 12px 14px;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(230px, 275px);
+  grid-template-columns: minmax(0, 1fr) minmax(305px, 325px);
   gap: 12px;
   align-items: center;
   border: 1px solid var(--line);
@@ -185,16 +222,20 @@ h3 {
     rgba(255, 255, 255, 0.92);
 }
 
+.use-case-copy {
+  max-width: 500px;
+}
+
 .use-case-copy h2 {
   margin-bottom: 6px;
-  max-width: 620px;
+  max-width: 100%;
   font-size: clamp(1.05rem, 2vw, 1.28rem);
   line-height: 1.1;
   letter-spacing: 0;
 }
 
 .use-case-copy p {
-  max-width: 620px;
+  max-width: 100%;
   margin-bottom: 0;
   color: #344353;
   font-size: 0.78rem;
@@ -903,7 +944,6 @@ html[data-theme="dark"] .architecture-stack {
 
 @media (max-width: 1180px) {
   .thesis-card,
-  .use-case-band,
   .interactive-head,
   .architecture-stack {
     grid-template-columns: 1fr;
@@ -922,6 +962,14 @@ html[data-theme="dark"] .architecture-stack {
   .page-shell {
     width: min(100vw - 20px, 720px);
     padding-top: 10px;
+  }
+
+  .use-case-band {
+    grid-template-columns: 1fr;
+  }
+
+  .use-case-copy {
+    max-width: none;
   }
 
   .thesis-header h1 {
@@ -1011,6 +1059,6 @@ html[data-theme="dark"] .architecture-stack {
   </head>
   <body>
     <div id="root"></div>
-    <script src="./app.js?v=20260514-local-bundle" defer data-cfasync="false"></script>
+    <script src="./app.js?v=20260514-refine" defer data-cfasync="false"></script>
   </body>
 </html>

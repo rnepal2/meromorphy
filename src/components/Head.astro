@@ -108,10 +108,15 @@ const { title, description, image = "/images/Meromorphy.png" } = Astro.props;
       toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
     });
 
+    bindInteractiveResidueMessages();
+
     document.querySelectorAll(".interactive-residue-frame").forEach((frame) => {
-      if (frame.dataset.themeSyncBound) return;
-      frame.dataset.themeSyncBound = "true";
-      frame.addEventListener("load", syncInteractiveResidueTheme);
+      if (frame.dataset.interactiveResidueBound) return;
+      frame.dataset.interactiveResidueBound = "true";
+      frame.addEventListener("load", () => {
+        syncInteractiveResidueTheme();
+        resizeInteractiveResidueFrame(frame);
+      });
     });
     syncInteractiveResidueTheme();
 
@@ -192,6 +197,51 @@ function toggleTheme(dark) {
         targetOrigin
       );
     });
+  }
+
+  function bindInteractiveResidueMessages() {
+    if (window.__interactiveResidueMessagesBound) return;
+    window.__interactiveResidueMessagesBound = "true";
+    window.addEventListener("message", handleInteractiveResidueMessage);
+  }
+
+  function handleInteractiveResidueMessage(event) {
+    if (window.location.origin !== "null" && event.origin !== window.location.origin) return;
+
+    if (event.data?.type === "meromorphy:theme-ready") {
+      syncInteractiveResidueTheme();
+      return;
+    }
+
+    if (event.data?.type !== "meromorphy:interactive-height") return;
+
+    const height = Number(event.data.height);
+    if (!Number.isFinite(height) || height <= 0) return;
+
+    document.querySelectorAll(".interactive-residue-frame").forEach((frame) => {
+      if (frame.contentWindow === event.source) {
+        frame.style.height = `${Math.max(320, Math.ceil(height))}px`;
+      }
+    });
+  }
+
+  function resizeInteractiveResidueFrame(frame) {
+    try {
+      const doc = frame.contentDocument;
+      const shell = doc?.querySelector(".page-shell");
+      const shellBottom = shell?.getBoundingClientRect().bottom || 0;
+      const fallback = Math.max(
+        doc?.documentElement?.scrollHeight || 0,
+        doc?.body?.scrollHeight || 0
+      );
+      const height = Math.max(shellBottom, fallback);
+
+      if (height > 0) {
+        frame.style.height = `${Math.ceil(height)}px`;
+      }
+    } catch {
+      // Cross-origin frames keep their static fallback height.
+    }
   }
 
   function preloadTheme() {

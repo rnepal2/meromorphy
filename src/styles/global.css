@@ -64,6 +64,7 @@ footer {
 .interactive-residue-frame {
   @apply block w-full overflow-hidden rounded-lg border border-black/15 bg-stone-100 dark:border-white/20 dark:bg-stone-950;
   height: 1720px;
+  transition: height 180ms ease;
 }
 
 @media (max-width: 820px) {
