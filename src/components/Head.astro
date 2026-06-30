@@ -23,6 +23,30 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const { title, description, image = "/images/Meromorphy.png" } = Astro.props;
 ---
 
+<!-- Google tag (gtag.js) -->
+<script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-NBZ4SCSG8C" data-cfasync="false"></script>
+<script is:inline data-cfasync="false">
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = window.gtag || function(){window.dataLayer.push(arguments);}
+
+  if (!window.__meromorphyGtagInitialized) {
+    window.__meromorphyGtagInitialized = true;
+    window.gtag("js", new Date());
+    window.gtag("config", "G-NBZ4SCSG8C");
+  }
+
+  if (!window.__meromorphyGtagPageViewsBound) {
+    window.__meromorphyGtagPageViewsBound = true;
+    document.addEventListener("astro:after-swap", () => {
+      window.gtag("config", "G-NBZ4SCSG8C", {
+        page_location: window.location.href,
+        page_path: window.location.pathname + window.location.search,
+        page_title: document.title,
+      });
+    });
+  }
+</script>
+
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
