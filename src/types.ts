@@ -3,6 +3,7 @@ export type Site = {
   URL: string;
   AUTHOR: string;
   TAGLINE: string;
+  TOPICS: string[];
   EMAIL: string;
   NUM_POSTS_ON_HOMEPAGE: number;
   NUM_PROJECTS_ON_HOMEPAGE: number;

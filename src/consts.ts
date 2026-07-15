@@ -5,6 +5,16 @@ export const SITE: Site = {
   URL: "https://meromorphy.com",
   AUTHOR: "Rabindra Nepal",
   TAGLINE: "Almost Understood. Beautifully Broken.",
+  TOPICS: [
+    "science",
+    "technology",
+    "artificial intelligence",
+    "machine learning",
+    "data science",
+    "mathematics",
+    "innovation",
+    "personal essays",
+  ],
   EMAIL: "",
   NUM_POSTS_ON_HOMEPAGE: 3,
   NUM_PROJECTS_ON_HOMEPAGE: 3,
@@ -13,28 +23,28 @@ export const SITE: Site = {
 export const HOME: Metadata = {
   TITLE: "Home",
   DESCRIPTION:
-    "Meromorphy — Almost Understood. Beautifully Broken. A space for science, life, innovation, and the singularities in between.",
+    "Meromorphy is Rabindra Nepal's independent website for essays and interactive projects on science, mathematics, data science, AI, innovation, and human experience.",
 };
 
 export const RESIDUES: Metadata = {
   TITLE: "Residues",
-  DESCRIPTION: "What lingers after the pole — reflections on science, life, and the singularities in between.",
+  DESCRIPTION: "Personal essays and interactive articles exploring science, mathematics, artificial intelligence, innovation, life, and human experience.",
 };
 
 export const ARTIFACTS: Metadata = {
   TITLE: "Artifacts",
   DESCRIPTION:
-    "Finite constructions from infinite curiosity — projects in data science, ML, and AI.",
+    "Interactive projects and technical articles in data science, machine learning, artificial intelligence, and scientific computing.",
 };
 
 export const MANIFOLD: Metadata = {
   TITLE: "Manifold",
-  DESCRIPTION: "The surface, the trajectory, the coordinates — who I am and where I've been.",
+  DESCRIPTION: "About Rabindra Nepal, a scientist and data scientist working across physics, machine learning, generative AI, and innovation.",
 };
 
 export const INTERFACE: Metadata = {
   TITLE: "Interface",
-  DESCRIPTION: "A boundary where two domains meet — reach out and connect.",
+  DESCRIPTION: "Contact Rabindra Nepal about Meromorphy, science, data science, artificial intelligence, research, and related ideas.",
 };
 
 export const SOCIALS: Socials = [

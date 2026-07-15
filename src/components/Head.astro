@@ -42,6 +42,11 @@ const websiteID = new URL("/#website", Astro.site).href;
 const authorID = new URL("/manifold/#person", Astro.site).href;
 const pageID = `${canonicalURL.href}#webpage`;
 const publishedISO = publishedTime?.toISOString();
+const topicKeywords = SITE.TOPICS.join(", ");
+const topicEntities = SITE.TOPICS.map((name) => ({
+  "@type": "Thing",
+  name,
+}));
 
 const pageSchema = {
   "@type": schemaType,
@@ -52,6 +57,8 @@ const pageSchema = {
   image: imageURL.href,
   isPartOf: { "@id": websiteID },
   inLanguage: "en-US",
+  keywords: topicKeywords,
+  about: topicEntities,
   ...(pageType === "article" && {
     headline: schemaTitle,
     datePublished: publishedISO,
@@ -71,8 +78,10 @@ const structuredData = {
       url: new URL("/", Astro.site).href,
       name: SITE.NAME,
       alternateName: SITE.TAGLINE,
-      description: "A space for science, life, innovation, and the singularities in between.",
+      description: "An independent website for essays and interactive projects on science, mathematics, data science, artificial intelligence, innovation, and human experience.",
       inLanguage: "en-US",
+      keywords: topicKeywords,
+      about: topicEntities,
       author: { "@id": authorID },
     },
     {
@@ -80,6 +89,7 @@ const structuredData = {
       "@id": authorID,
       name: SITE.AUTHOR,
       url: authorURL.href,
+      knowsAbout: topicEntities,
       sameAs: SOCIALS.map((social) => social.HREF),
     },
     pageSchema,
@@ -138,6 +148,7 @@ const structuredData = {
 <meta name="title" content={title} />
 <meta name="description" content={description} />
 <meta name="author" content={SITE.AUTHOR} />
+<meta name="keywords" content={topicKeywords} />
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
 
 <!-- Open Graph / Facebook -->
