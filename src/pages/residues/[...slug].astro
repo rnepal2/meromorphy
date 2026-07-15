@@ -21,12 +21,18 @@ const post = Astro.props;
 const { Content } = await render(post);
 ---
 
-<PageLayout title={post.data.title} description={post.data.description}>
+<PageLayout
+  title={post.data.title}
+  description={post.data.description}
+  pageType="article"
+  schemaType="BlogPosting"
+  publishedTime={post.data.date}
+>
   <Container>
     {!post.data.bare && (
       <>
         <div class="animate">
-          <BackToPrev href="/residues">
+          <BackToPrev href="/residues/">
             Return to residues
           </BackToPrev>
         </div>
@@ -45,10 +51,11 @@ const { Content } = await render(post);
             )}
           </div>
           {!post.data.hideTitle && (
-            <div class="animate text-2xl font-semibold text-black dark:text-white">
+            <h1 class="animate text-2xl font-semibold text-black dark:text-white">
               {post.data.title}
-            </div>
+            </h1>
           )}
+          {post.data.hideTitle && <h1 class="sr-only">{post.data.title}</h1>}
         </div>
       </>
     )}

@@ -4,12 +4,12 @@ import PageLayout from "@layouts/PageLayout.astro";
 import { INTERFACE } from "@consts";
 ---
 
-<PageLayout title={INTERFACE.TITLE} description={INTERFACE.DESCRIPTION}>
+<PageLayout title={INTERFACE.TITLE} description={INTERFACE.DESCRIPTION} schemaType="ContactPage">
   <Container>
     <div class="space-y-10">
-      <div class="animate font-semibold text-black dark:text-white text-xl">
+      <h1 class="animate font-semibold text-black dark:text-white text-xl">
         Interface
-      </div>
+      </h1>
       <div class="animate">
         <p class="font-serif italic mb-8 opacity-75">
           A boundary where two domains meet. If you'd like to reach across, use the form below.

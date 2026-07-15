@@ -19,13 +19,21 @@ const projects = (await getCollection("projects"))
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
-    <div class="animate text-center my-4">
-      <img
-        src="/images/Meromorphy.png"
-        alt="Meromorphy logo"
-        class="mx-auto w-64 min-w-[95%] max-w-[100%]"
-      />
-    </div>
+    <h1 class="animate text-center my-4">
+      <picture>
+        <source srcset="/images/Meromorphy.webp" type="image/webp" />
+        <img
+          src="/images/Meromorphy.png"
+          alt="Meromorphy logo"
+          width="1800"
+          height="810"
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          class="mx-auto w-64 min-w-[95%] max-w-[100%]"
+        />
+      </picture>
+    </h1>
     <div class="space-y-16">
       <section>
         <article class="prose-content space-y-4">
@@ -37,10 +45,10 @@ const projects = (await getCollection("projects"))
 
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
+          <h2 class="font-semibold text-black dark:text-white">
             Recent Residues
-          </h5>
-          <Link href="/residues">
+          </h2>
+          <Link href="/residues/">
             See all residues
           </Link>
         </div>
@@ -55,10 +63,10 @@ const projects = (await getCollection("projects"))
 
       <section class="animate space-y-6">
         <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
+          <h2 class="font-semibold text-black dark:text-white">
             Recent Artifacts
-          </h5>
-          <Link href="/artifacts">
+          </h2>
+          <Link href="/artifacts/">
             See all artifacts
           </Link>
         </div>
@@ -78,7 +86,7 @@ const projects = (await getCollection("projects"))
         <article class="prose-content">
           <p>
             A boundary where two domains meet. Reach out on social media or through the
-            <Link href="/interface">interface</Link>.
+            <Link href="/interface/">interface</Link>.
           </p>
         </article>
         <ul class="flex flex-wrap gap-2">

@@ -9,7 +9,7 @@ hideReadingTime: true
 <figure class="interactive-residue not-prose" aria-label="Interactive agentic control plane model">
   <iframe
     class="interactive-residue-frame"
-    src="/interactive/agentic-control-plane/?v=20260514-final"
+    src="/interactive/agentic-control-plane/index.html?v=20260514-final"
     title="Agentic Corporate Functions Bounded by Authority"
     loading="lazy"
   ></iframe>

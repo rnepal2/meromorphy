@@ -7,15 +7,38 @@ import { SITE } from "@consts";
 type Props = {
   title: string;
   description: string;
+  image?: string;
+  pageType?: "website" | "article" | "profile";
+  schemaType?: "WebPage" | "CollectionPage" | "ContactPage" | "ProfilePage" | "BlogPosting" | "TechArticle";
+  publishedTime?: Date;
 };
 
-const { title, description } = Astro.props;
+const {
+  title,
+  description,
+  image,
+  pageType = "website",
+  schemaType = "WebPage",
+  publishedTime,
+} = Astro.props;
+
+const documentTitle = Astro.url.pathname === "/"
+  ? `${SITE.NAME} | Science, AI, and Singularities`
+  : `${title} | ${SITE.NAME}`;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <Head title={`${title} | ${SITE.NAME}`} description={description} />
+    <Head
+      title={documentTitle}
+      schemaTitle={Astro.url.pathname === "/" ? SITE.NAME : title}
+      description={description}
+      image={image}
+      pageType={pageType}
+      schemaType={schemaType}
+      publishedTime={publishedTime}
+    />
   </head>
   <body>
     <Header />

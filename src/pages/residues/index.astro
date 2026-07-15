@@ -25,12 +25,12 @@ const posts = data.reduce((acc: Acc, post) => {
 const years = Object.keys(posts).sort((a, b) => parseInt(b) - parseInt(a)); 
 ---
 
-<PageLayout title={RESIDUES.TITLE} description={RESIDUES.DESCRIPTION}>
+<PageLayout title={RESIDUES.TITLE} description={RESIDUES.DESCRIPTION} schemaType="CollectionPage">
   <Container>
     <div class="space-y-10">
-      <div class="animate font-semibold text-black dark:text-white">
+      <h1 class="animate font-semibold text-black dark:text-white">
         Residues
-      </div>
+      </h1>
       <p class="animate text-sm italic opacity-75">
         What lingers around the poles? Residues - reflections to account the singularities within.
       </p>
