@@ -50,6 +50,71 @@ footer {
   margin-right: 0;
 }
 
+.home-masthead {
+  position: relative;
+  display: grid;
+  min-height: 17rem;
+  margin: -1.5rem 0 3.5rem;
+  place-items: center;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid rgb(28 25 23 / 0.1);
+}
+
+.dark .home-masthead {
+  border-color: rgb(255 255 255 / 0.12);
+}
+
+.home-masthead-field {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+}
+
+.home-masthead-copy {
+  padding: 2.5rem 1rem;
+  text-align: center;
+}
+
+.home-masthead-copy h1 {
+  margin: 0;
+  color: rgb(28 25 23);
+  font-family: Lora, ui-serif, Georgia, serif;
+  font-size: 4rem;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.dark .home-masthead-copy h1 {
+  color: rgb(250 250 249);
+}
+
+.home-masthead-copy p {
+  margin: 1rem 0 0;
+  color: rgb(28 25 23 / 0.56);
+  font-size: 0.75rem;
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+.dark .home-masthead-copy p {
+  color: rgb(255 255 255 / 0.52);
+}
+
+@media (max-width: 640px) {
+  .home-masthead {
+    min-height: 13.5rem;
+    margin-top: -2rem;
+    margin-bottom: 3rem;
+  }
+
+  .home-masthead-copy h1 {
+    font-size: 3rem;
+  }
+}
+
 /* Custom blockquote styling */
 .prose-content blockquote {
   @apply border-l-4 border-black/20 dark:border-white/20;

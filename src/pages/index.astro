@@ -19,26 +19,18 @@ const projects = (await getCollection("projects"))
 
 <PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
-    <h1 class="animate text-center my-4">
-      <picture>
-        <source srcset="/images/Meromorphy.webp" type="image/webp" />
-        <img
-          src="/images/Meromorphy.png"
-          alt="Meromorphy logo"
-          width="1800"
-          height="810"
-          loading="eager"
-          fetchpriority="high"
-          decoding="async"
-          class="mx-auto w-64 min-w-[95%] max-w-[100%]"
-        />
-      </picture>
-    </h1>
+    <section class="home-masthead animate" aria-labelledby="home-title">
+      <canvas class="home-masthead-field" data-meromorphy-field aria-hidden="true"></canvas>
+      <div class="home-masthead-copy">
+        <h1 id="home-title">Meromorphy</h1>
+        <p>{SITE.TAGLINE}</p>
+      </div>
+    </section>
     <div class="space-y-16">
       <section>
         <article class="prose-content space-y-4">
           <p class="animate text-sm leading-relaxed">
-            In mathematics, a meromorphic function is smooth and well-behaved — except at isolated singularities where it breaks down completely. Science, life, human experience, and the universe are largely intelligible — yet punctuated by deep, personal, or universal mysteries that defy resolution. Meromorphy is a space for exploring those surfaces and those singularities — with curiosity, and respect for what remains unknown.
+            Meromorphic functions are smooth and well-behaved — except at isolated singularities where they comppletely breakdown. Life, science, human experience, and the universe are largely intelligible — yet punctuated by deep, personal, or universal mysteries that defy resolution. Meromorphy is a space for exploring those known surfaces and unknown singularities.
           </p>
         </article>
       </section>
@@ -103,3 +95,396 @@ const projects = (await getCollection("projects"))
     </div>
   </Container>
 </PageLayout>
+
+<script>
+  function initMeromorphyField() {
+    const canvas = document.querySelector<HTMLCanvasElement>("[data-meromorphy-field]");
+    if (!canvas || canvas.dataset.initialized) return;
+
+    canvas.dataset.initialized = "true";
+    const context = canvas.getContext("2d");
+    const masthead = canvas.closest<HTMLElement>(".home-masthead");
+    if (!context || !masthead) return;
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let width = 0;
+    let height = 0;
+    let frame = 0;
+    let lastDrawTime = 0;
+    let pointerX = -1000;
+    let pointerY = -1000;
+    let targetMotionX = 0;
+    let targetMotionY = 0;
+    let motionX = 0;
+    let motionY = 0;
+    const targetEnergies = [0, 0];
+    const poleEnergies = [0, 0];
+
+    const plane = {
+      left: -2.6,
+      right: 2.6,
+      top: -1.3,
+      bottom: 1.3,
+    };
+
+    const poles = [
+      { x: -1.48, y: 0.42 },
+      { x: 1.35, y: -0.46 },
+    ];
+    const baseLevels = [-1.8, -1.5, -1.2, -0.9, -0.6, -0.3, 0, 0.3, 0.6, 0.9, 1.2, 1.5];
+    const poleLevels = [1.8, 2.05, 2.3, 2.55, 2.8, 3.05];
+
+    const toScreen = (point: { x: number; y: number }) => ({
+      x: ((point.x - plane.left) / (plane.right - plane.left)) * width,
+      y: ((point.y - plane.top) / (plane.bottom - plane.top)) * height,
+    });
+
+    const getRenderedPoles = () => {
+      const compactness = Math.max(0, Math.min(1, (560 - width) / 170));
+
+      return [
+        {
+          x: poles[0].x - compactness * 0.24 + motionX * 0.09 + motionY * 0.02,
+          y: poles[0].y + compactness * 0.38 + motionY * 0.065,
+        },
+        {
+          x: poles[1].x + compactness * 0.18 - motionX * 0.075 + motionY * 0.018,
+          y: poles[1].y - compactness * 0.24 - motionY * 0.06,
+        },
+      ];
+    };
+
+    const fieldValue = (
+      x: number,
+      y: number,
+      renderedPoles: Array<{ x: number; y: number }>,
+    ) => {
+      const distance = (point: { x: number; y: number }) =>
+        Math.max(0.018, Math.hypot(x - point.x, y - point.y));
+
+      // log|f(z)| for f(z) = 1 / ((z - p1)(z - p2))
+      return -Math.log(distance(renderedPoles[0]))
+        - Math.log(distance(renderedPoles[1]));
+    };
+
+    const resize = () => {
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      const bounds = masthead.getBoundingClientRect();
+      width = Math.max(1, bounds.width);
+      height = Math.max(1, bounds.height);
+      canvas.width = Math.round(width * ratio);
+      canvas.height = Math.round(height * ratio);
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      draw(performance.now());
+    };
+
+    const drawContours = (
+      values: Float32Array,
+      columns: number,
+      rows: number,
+      level: number,
+      color: string,
+      lineWidth: number,
+    ) => {
+      const cellWidth = width / columns;
+      const cellHeight = height / rows;
+      const valueAt = (column: number, row: number) => values[row * (columns + 1) + column];
+      const interpolate = (a: number, b: number) => {
+        if (Math.abs(b - a) < 0.0001) return 0.5;
+        return Math.min(1, Math.max(0, (level - a) / (b - a)));
+      };
+
+      context.beginPath();
+      context.strokeStyle = color;
+      context.lineWidth = lineWidth;
+
+      for (let row = 0; row < rows; row += 1) {
+        for (let column = 0; column < columns; column += 1) {
+          const topLeft = valueAt(column, row);
+          const topRight = valueAt(column + 1, row);
+          const bottomRight = valueAt(column + 1, row + 1);
+          const bottomLeft = valueAt(column, row + 1);
+          const x = column * cellWidth;
+          const y = row * cellHeight;
+          const intersections: Array<{ edge: number; x: number; y: number }> = [];
+          const crosses = (a: number, b: number) =>
+            (a < level && b >= level) || (b < level && a >= level);
+
+          if (crosses(topLeft, topRight)) {
+            intersections.push({ edge: 0, x: x + interpolate(topLeft, topRight) * cellWidth, y });
+          }
+          if (crosses(topRight, bottomRight)) {
+            intersections.push({ edge: 1, x: x + cellWidth, y: y + interpolate(topRight, bottomRight) * cellHeight });
+          }
+          if (crosses(bottomLeft, bottomRight)) {
+            intersections.push({ edge: 2, x: x + interpolate(bottomLeft, bottomRight) * cellWidth, y: y + cellHeight });
+          }
+          if (crosses(topLeft, bottomLeft)) {
+            intersections.push({ edge: 3, x, y: y + interpolate(topLeft, bottomLeft) * cellHeight });
+          }
+
+          const connect = (first: number, second: number) => {
+            context.moveTo(intersections[first].x, intersections[first].y);
+            context.lineTo(intersections[second].x, intersections[second].y);
+          };
+
+          if (intersections.length === 2) {
+            connect(0, 1);
+          } else if (intersections.length === 4) {
+            const center = (topLeft + topRight + bottomRight + bottomLeft) / 4;
+            if (center >= level) {
+              connect(0, 1);
+              connect(2, 3);
+            } else {
+              connect(0, 3);
+              connect(1, 2);
+            }
+          }
+        }
+      }
+
+      context.stroke();
+    };
+
+    const draw = (time: number) => {
+      context.clearRect(0, 0, width, height);
+
+      const dark = document.documentElement.classList.contains("dark");
+      const baseAlpha = dark ? 0.13 : 0.12;
+      const pointColor = dark ? "rgba(255, 255, 255, 0.64)" : "rgba(28, 25, 23, 0.6)";
+      const phase = reduceMotion.matches ? 0 : Math.sin(time * 0.00022) * 0.018;
+      const renderedPoles = getRenderedPoles();
+      const columns = Math.max(72, Math.min(120, Math.round(width / 8)));
+      const rows = Math.max(30, Math.min(54, Math.round(height / 6)));
+      const values = new Float32Array((columns + 1) * (rows + 1));
+
+      for (let row = 0; row <= rows; row += 1) {
+        const y = plane.top + (row / rows) * (plane.bottom - plane.top);
+        for (let column = 0; column <= columns; column += 1) {
+          const x = plane.left + (column / columns) * (plane.right - plane.left);
+          values[row * (columns + 1) + column] = fieldValue(x, y, renderedPoles);
+        }
+      }
+
+      baseLevels.forEach((level, index) => {
+        const emphasis = index % 3 === 0 ? 1.16 : 1;
+        const color = dark
+          ? `rgba(255, 255, 255, ${baseAlpha * emphasis})`
+          : `rgba(28, 25, 23, ${baseAlpha * emphasis})`;
+        drawContours(values, columns, rows, level + phase, color, index % 3 === 0 ? 1 : 0.75);
+      });
+
+      renderedPoles.forEach((pole, poleIndex) => {
+        const poleEnergy = poleEnergies[poleIndex];
+        const polePosition = toScreen(pole);
+
+        if (poleEnergy > 0.01) {
+          context.save();
+          context.beginPath();
+          context.arc(polePosition.x, polePosition.y, 68 + poleEnergy * 20, 0, Math.PI * 2);
+          context.clip();
+
+          poleLevels.forEach((level, levelIndex) => {
+            const alpha = poleEnergy * (0.1 + levelIndex * 0.028);
+            const color = dark
+              ? `rgba(255, 255, 255, ${alpha})`
+              : `rgba(28, 25, 23, ${alpha})`;
+            drawContours(values, columns, rows, level + phase, color, 0.8);
+          });
+
+          context.restore();
+        }
+
+        const ringRadius = 7.5 + poleEnergy * 3;
+        context.strokeStyle = pointColor;
+        context.fillStyle = pointColor;
+        context.lineWidth = 1;
+        context.beginPath();
+        context.arc(polePosition.x, polePosition.y, 2.1, 0, Math.PI * 2);
+        context.fill();
+        context.beginPath();
+        context.arc(polePosition.x, polePosition.y, ringRadius, 0, Math.PI * 2);
+        context.stroke();
+
+        if (poleEnergy > 0.01) {
+          const spikeHeight = 9 + poleEnergy * 43;
+          const spikeWidth = 2.8 + poleEnergy * 7.8;
+          const spikeAlpha = 0.15 + poleEnergy * 0.47;
+          const apexY = polePosition.y - spikeHeight;
+          const spikeColor = (alpha: number) => dark
+            ? `rgba(255, 255, 255, ${alpha})`
+            : `rgba(28, 25, 23, ${alpha})`;
+          const spikeGradient = context.createLinearGradient(
+            polePosition.x,
+            apexY,
+            polePosition.x,
+            polePosition.y,
+          );
+          spikeGradient.addColorStop(0, spikeColor(spikeAlpha * 0.92));
+          spikeGradient.addColorStop(0.55, spikeColor(spikeAlpha * 0.48));
+          spikeGradient.addColorStop(1, spikeColor(spikeAlpha * 0.08));
+
+          context.save();
+          context.fillStyle = spikeGradient;
+          context.strokeStyle = spikeColor(0.22 + poleEnergy * 0.5);
+          context.lineWidth = 0.75 + poleEnergy * 0.35;
+          context.beginPath();
+          context.moveTo(polePosition.x, apexY);
+          context.bezierCurveTo(
+            polePosition.x - spikeWidth * 0.08,
+            apexY + spikeHeight * 0.42,
+            polePosition.x - spikeWidth * 0.72,
+            polePosition.y - spikeHeight * 0.22,
+            polePosition.x - spikeWidth,
+            polePosition.y - spikeHeight * 0.06,
+          );
+          context.quadraticCurveTo(
+            polePosition.x - spikeWidth * 0.52,
+            polePosition.y,
+            polePosition.x,
+            polePosition.y,
+          );
+          context.quadraticCurveTo(
+            polePosition.x + spikeWidth * 0.52,
+            polePosition.y,
+            polePosition.x + spikeWidth,
+            polePosition.y - spikeHeight * 0.06,
+          );
+          context.bezierCurveTo(
+            polePosition.x + spikeWidth * 0.72,
+            polePosition.y - spikeHeight * 0.22,
+            polePosition.x + spikeWidth * 0.08,
+            apexY + spikeHeight * 0.42,
+            polePosition.x,
+            apexY,
+          );
+          context.closePath();
+          context.fill();
+          context.stroke();
+
+          context.strokeStyle = spikeColor(0.1 + poleEnergy * 0.24);
+          context.lineWidth = 0.55;
+          context.beginPath();
+          context.moveTo(polePosition.x - 0.2, apexY + 1);
+          context.bezierCurveTo(
+            polePosition.x - 0.5,
+            apexY + spikeHeight * 0.45,
+            polePosition.x - spikeWidth * 0.12,
+            polePosition.y - spikeHeight * 0.18,
+            polePosition.x,
+            polePosition.y - 1,
+          );
+          context.stroke();
+          context.restore();
+        }
+      });
+    };
+
+    const updateTargetEnergies = () => {
+      const hoverRadius = Math.max(54, Math.min(76, width * 0.085));
+      const renderedPoles = getRenderedPoles();
+
+      renderedPoles.forEach((pole, index) => {
+        const polePosition = toScreen(pole);
+        const distance = Math.hypot(pointerX - polePosition.x, pointerY - polePosition.y);
+        const proximity = Math.max(0, 1 - distance / hoverRadius);
+        targetEnergies[index] = proximity * proximity * (3 - 2 * proximity);
+      });
+    };
+
+    const animate = (time: number) => {
+      if (!canvas.isConnected) {
+        cancelAnimationFrame(frame);
+        return;
+      }
+
+      motionX += (targetMotionX - motionX) * 0.055;
+      motionY += (targetMotionY - motionY) * 0.055;
+      updateTargetEnergies();
+      poleEnergies.forEach((energy, index) => {
+        poleEnergies[index] = energy + (targetEnergies[index] - energy) * 0.075;
+      });
+      if (time - lastDrawTime >= 32) {
+        draw(time);
+        lastDrawTime = time;
+      }
+      frame = requestAnimationFrame(animate);
+    };
+
+    const handlePointer = (event: PointerEvent) => {
+      const bounds = masthead.getBoundingClientRect();
+      pointerX = event.clientX - bounds.left;
+      pointerY = event.clientY - bounds.top;
+      targetMotionX = Math.max(-1, Math.min(1, (pointerX / width - 0.5) * 2));
+      targetMotionY = Math.max(-1, Math.min(1, (pointerY / height - 0.5) * 2));
+      updateTargetEnergies();
+
+      if (reduceMotion.matches) {
+        targetMotionX = 0;
+        targetMotionY = 0;
+        targetEnergies.forEach((energy, index) => {
+          poleEnergies[index] = energy;
+        });
+        draw(0);
+      }
+    };
+
+    const resetPointer = () => {
+      pointerX = -1000;
+      pointerY = -1000;
+      targetMotionX = 0;
+      targetMotionY = 0;
+      targetEnergies.fill(0);
+      if (reduceMotion.matches) {
+        poleEnergies.fill(0);
+        draw(0);
+      }
+    };
+
+    const handleMotionChange = () => {
+      cancelAnimationFrame(frame);
+      if (reduceMotion.matches) {
+        targetMotionX = 0;
+        targetMotionY = 0;
+        motionX = 0;
+        motionY = 0;
+        updateTargetEnergies();
+        targetEnergies.forEach((energy, index) => {
+          poleEnergies[index] = energy;
+        });
+        draw(0);
+      } else {
+        frame = requestAnimationFrame(animate);
+      }
+    };
+
+    const resizeObserver = new ResizeObserver(resize);
+    const themeObserver = new MutationObserver(() => draw(performance.now()));
+    resizeObserver.observe(masthead);
+    themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    masthead.addEventListener("pointermove", handlePointer);
+    masthead.addEventListener("pointerleave", resetPointer);
+    reduceMotion.addEventListener("change", handleMotionChange);
+
+    document.addEventListener("astro:before-swap", () => {
+      cancelAnimationFrame(frame);
+      resizeObserver.disconnect();
+      themeObserver.disconnect();
+      masthead.removeEventListener("pointermove", handlePointer);
+      masthead.removeEventListener("pointerleave", resetPointer);
+      reduceMotion.removeEventListener("change", handleMotionChange);
+    }, { once: true });
+
+    resize();
+    if (reduceMotion.matches) {
+      draw(0);
+    } else {
+      frame = requestAnimationFrame(animate);
+    }
+  }
+
+  document.addEventListener("astro:page-load", initMeromorphyField);
+  initMeromorphyField();
+</script>
