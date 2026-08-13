@@ -16,9 +16,6 @@ const projects = (await getCollection("projects"))
       <h1 class="animate font-semibold text-black dark:text-white">
         Artifacts
       </h1>
-      <p class="animate text-sm italic opacity-75">
-        Finite constructions from infinite curiosity — projects in data science, ML, and AI.
-      </p>
       <ul class="animate flex flex-col gap-4">
         {
           projects.map((project) => (
