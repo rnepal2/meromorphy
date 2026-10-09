@@ -5,6 +5,8 @@ date: "Jun 05 2025"
 repoURL: "https://github.com/rnepal2/ChatLibrary"
 ---
 
+**Maintenance note (October 2026):** ChatLibrary is no longer maintained and is retained as a record of the original work. This article preserves the original project description and publication date.
+
 Large Language Models (LLMs) offer powerful text understanding and generation capabilities. However, many enterprise and specialized use cases require these models to provide answers based on internal, proprietary data sources rather than general knowledge. Relying on standard LLMs for such tasks can lead to responses that are generic, lack specific context, or are incorrect. Retrieval Augmented Generation (RAG) pipelines, such as the one implemented in ChatLibrary, offer a robust solution by grounding LLM responses in specific, verified information. This document outlines the ChatLibrary system, its architecture, and the technologies used.
 
 ChatLibrary is a question-answering system designed to interact with proprietary knowledge bases. It employs a RAG pipeline to retrieve relevant document chunks and then uses an LLM to generate answers based solely on those retrieved chunks. The system emphasizes accuracy and relevance through a multi-stage process of retrieval, grading, and validation.
@@ -74,6 +76,6 @@ This methodology provides a more precise way to interact with organizational dat
 
 ChatLibrary demonstrates an effective application of a RAG pipeline for querying proprietary knowledge bases. Its design emphasizes document retrieval, adaptive query handling, and rigorous validation to ensure trustworthy and relevant answers.
 
-Further improvements could involve integrating a broader range of data sources, enhancing conversational memory for more natural follow-up interactions, or exploring advanced methods for synthesizing information from multiple documents. The ongoing refinement of such AI systems is key to developing more reliable and intelligent information access tools.
+The corrective RAG logic has been extracted into the reusable [`grounding/` module](https://github.com/rnepal2/ChatLibrary/tree/main/grounding). It provides relevance and grounding checks, query rewriting, bounded retries, an audit trail, and optional feedback logging. The module accepts a compatible chat model and supplied retrieval and generation functions, allowing reuse without the original application's Azure OpenAI, ChromaDB, LangGraph, or Streamlit dependencies.
 
 Want to check full code and dig deeper? Check out the full project on my [GitHub repo](https://github.com/rnepal2/ChatLibrary)!
