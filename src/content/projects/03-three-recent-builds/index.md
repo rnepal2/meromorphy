@@ -1,10 +1,8 @@
 ---
-title: "A Few Projects, Finally Built"
+title: "Recent Artifacts"
 description: "An interactive spin-texture atlas, a public myeloma landscape, and self-hosted product analytics."
 date: "Oct 08 2026"
 ---
-
-These are a few projects I had wanted to build for some time but hadn't been able to prioritize. With the help of agentic coding, I recently turned them into working tools. Below is a brief introduction to each, with links to explore the projects and their source code.
 
 ### Spin Texture Atlas
 
